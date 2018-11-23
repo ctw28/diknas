@@ -1,0 +1,17 @@
+input { 
+	width: 50px 
+}
+
+.title_utama{
+	font-size: 14px; 
+	text-align: center; 
+	text-transform: uppercase;
+}
+
+th, td, input {
+	text-align: center;
+}
+
+.nama{
+	text-align: left;
+}
