@@ -6,6 +6,8 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 
+		$this->load->model('pengaturan_model');
+
 
 		if($this->session->userdata('logged_in'))
    		{
@@ -13,6 +15,9 @@ class Dashboard extends CI_Controller {
 			$isi['nama'] = $session_data['nama_wali_kelas']; 
 			$isi['kelas'] = $session_data['kelas'];
 		}
+	
+		$isi['data_mata_pelajaran'] = $this->pengaturan_model->get_data_mata_pelajaran();
+
 		// echo $isi['id_guru'];
 
 		$this->load->view('dashboard-view', $isi);

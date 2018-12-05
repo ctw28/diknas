@@ -90,7 +90,7 @@
     </head>
 
     <body class="no-skin">
-        <div id="navbar" class="navbar navbar-default ace-save-state">
+        <div id="navbar" class="navbar navbar-default ace-save-state" style="background-color: red !important;">
             <div class="navbar-container ace-save-state" id="navbar-container">
                 <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
                     <span class="sr-only">Toggle sidebar</span>
@@ -101,14 +101,14 @@
 
                 <div class="navbar-header pull-left">
                     <a href="<?php echo base_url()?>" class="navbar-brand">
-                        <small class="title_aplikasi">Penilaian <b>PROSES</b> Belajar</small>
+                        <small class="title_aplikasi">Penilaian <b>HASIL</b> Belajar</small>
                     </a>
                 </div>
 
                 <div class="navbar-buttons navbar-header pull-right" role="navigation">
                     <ul class="nav ace-nav">
                         <li class="light-blue dropdown-modal">
-                            <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            <a data-toggle="dropdown" href="#" class="dropdown-toggle" style="background-color: red !important;">
                                 <img class="nav-user-photo" src="<?php echo base_url()?>assets/images/man.png" alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
@@ -170,7 +170,7 @@
 
                         <ul class="submenu">
                             <li class="">
-                                <a href="http://localhost/proses_belajar/index.php/pengetahuan/tampil/<?php echo $id_guru?>">
+                                <a href="<?php echo base_url()?>index.php/pengetahuan/tampil/<?php echo $id_guru?>">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Pengetahuan
                                 </a>
@@ -179,7 +179,7 @@
                             </li>
 
                             <li class="">
-                                <a href="http://localhost/proses_belajar/index.php/keterampilan/tampil/<?php echo $id_guru?>">
+                                <a href="<?php echo base_url()?>index.php/keterampilan/tampil/<?php echo $id_guru?>">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Keterampilan
                                 </a>
@@ -187,7 +187,7 @@
                                 <b class="arrow"></b>
                             </li>
                             <li class="active">
-                                <a href="http://localhost/proses_belajar/index.php/sikap/tampil/<?php echo $id_guru?>">
+                                <a href="<?php echo base_url()?>index.php/sikap/tampil/<?php echo $id_guru?>">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Sikap
                                 </a>
@@ -210,7 +210,7 @@
                             <li><i class="ace-icon fa fa-home home-icon"></i>
                                 <a href="http://localhost/proses_belajar">Home</a>
                             </li>
-                            <li><a href="http://localhost/proses_belajar/index.php/sikap">Penilaian</a></li>
+                            <li><a href="<?php echo base_url()?>index.php/sikap">Penilaian</a></li>
                             <li class="active">Penilaian Sikap</li>
                         </ul><!-- /.breadcrumb -->
                     </div>

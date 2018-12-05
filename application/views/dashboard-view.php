@@ -33,7 +33,7 @@
     </head>
 
     <body class="no-skin">
-        <div id="navbar" class="navbar navbar-default ace-save-state">
+        <div id="navbar" class="navbar navbar-default ace-save-state" style="background-color: red !important;">
             <div class="navbar-container ace-save-state" id="navbar-container">
                 <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
                     <span class="sr-only">Toggle sidebar</span>
@@ -51,7 +51,7 @@
                 <div class="navbar-buttons navbar-header pull-right" role="navigation">
                     <ul class="nav ace-nav">
                         <li class="light-blue dropdown-modal">
-                            <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            <a data-toggle="dropdown" href="#" class="dropdown-toggle" style="background-color: red !important;">
                                 <img class="nav-user-photo" src="<?php echo base_url()?>assets/images/man.png" alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
@@ -105,10 +105,10 @@
                         <b class="arrow"></b>
                     </li>                   
 
-                    <!-- <li>
+                                       <li>
                         <a href="" class="dropdown-toggle">
                             <i class="menu-icon fa fa-list"></i>
-                            <span class="menu-text"> Penilaian </span>
+                            <span class="menu-text"> Pengaturan </span>
                             <b class="arrow fa fa-angle-down"></b>
                         </a>
 
@@ -116,32 +116,25 @@
 
                         <ul class="submenu">
                             <li class="">
-                                <a href="http://localhost/proses_belajar/index.php/pengetahuan/tampil/<?php echo $id_guru?>">
+                                <a href="<?php echo base_url()?>index.php/pengaturan/mata_pelajaran">
                                     <i class="menu-icon fa fa-caret-right"></i>
-                                    Pengetahuan
+                                    Mata Pelajaran
                                 </a>
 
                                 <b class="arrow"></b>
                             </li>
 
                             <li class="">
-                                <a href="http://localhost/proses_belajar/index.php/keterampilan/tampil/<?php echo $id_guru?>">
+                                <a href="<?php echo base_url()?>index.php/pengaturan/siswa">
                                     <i class="menu-icon fa fa-caret-right"></i>
-                                    Keterampilan
+                                    Siswa
                                 </a>
 
                                 <b class="arrow"></b>
                             </li>
-                            <li>
-                                <a href="http://localhost/proses_belajar/index.php/sikap/tampil/<?php echo $id_guru?>">
-                                    <i class="menu-icon fa fa-caret-right"></i>
-                                    Sikap
-                                </a>
-
-                                <b class="arrow"></b>
-                            </li>
+                            
                         </ul>
-                    </li> -->
+                    </li>
                 </ul><!-- /.nav-list -->
 
                 <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
@@ -154,9 +147,9 @@
                     <div class="breadcrumbs ace-save-state" id="breadcrumbs">
                         <ul class="breadcrumb">
                             <li><i class="ace-icon fa fa-home home-icon"></i>
-                                <a href="http://localhost/proses_belajar">Home</a>
+                                <a href="<?php echo base_url()?>">Home</a>
                             </li>
-                            <li><a href="http://localhost/proses_belajar/index.php/sikap">Penilaian</a></li>
+                            <li><a href="<?php echo base_url()?>index.php/sikap">Penilaian</a></li>
                             <li class="active"></li>
                         </ul><!-- /.breadcrumb -->
                     </div>
@@ -165,111 +158,49 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-
+                                <h2 style="text-transform: uppercase;">Daftar Mata Pelajaran Wajib</h2>
                                         
 
+                <div class="col-sm-12" >
+                    <?php
+                        $i = 1;
+                        foreach ($data_mata_pelajaran->result() as $row) {
+                            if($row->status_mapel == "wajib"){
+                    ?>
+                    <div class="col-sm-3" style="margin-bottom: 20px;">
+                        <a style="width: 90%" href="<?php echo base_url()?>index.php/hasil/tampil/<?php echo $row->id_guru ?>" type="button"  class="btn btn-white btn-primary">
+                            <h4><?php echo $row->mata_pelajaran ?></h4>
+                            <h5><?php echo $row->nama_guru ?></h5>
+                        </a>
+                        
+                    </div>
+                    <?php
+                        }
+                        }
+                    ?>
+                </div>
 
+                                <h2 style="text-transform: uppercase;">Daftar Mata Pelajaran Pilihan</h2>
+                                        
 
-
-
-
-
-<div class="col-sm-12">
-<div class="col-sm-3">
-  <a class="btn btn-primary col-sm-10" href="<?php echo base_url()?>index.php/hasil/tampil/1"><H4 style="padding-top: 0 !important; margin-top: 0 !important">Matematika</H4>Rudianto, S.Pd </a>
-</div>
-<div class="col-sm-3">
-  <a class="btn btn-primary col-sm-10" href="<?php echo base_url()?>index.php/hasil/tampil/2"><H4 style="padding-top: 0 !important; margin-top: 0 !important">Bahasa Indonesia</H4>Riyanti, S.Pd</a>
-</div>
-<div class="col-sm-3">
-  <a class="btn btn-primary col-sm-10" href="<?php echo base_url()?>index.php/hasil/tampil/3"><H4 style="padding-top: 0 !important; margin-top: 0 !important">Pendidikan Agama</H4>_______________</a>
-</div>
-
-<div class="col-sm-3">
-  <a class="btn btn-primary col-sm-10" href="<?php echo base_url()?>index.php/hasil/tampil/4">
-  <H4 style="padding-top: 0 !important; margin-top: 0 !important">
-  Pendidikan Pancasila
-</H4>_______________
-</a>
-</div>
-    
-</div>
-
-
-<div class="col-sm-3" style="padding-top: 20px;">
-  <a class="btn btn-primary col-sm-10" href="<?php echo base_url()?>index.php/hasil/tampil/5">
-  
-  <H4 style="padding-top: 0 !important; margin-top: 0 !important">
-  Sejarah Indonesia
-</H4>_______________
-</a>
-</div>
-
-<div class="col-sm-3" style="padding-top: 20px;">
-  <a class="btn btn-primary col-sm-10" href="<?php echo base_url()?>index.php/hasil/tampil/6">
-  <H4 style="padding-top: 0 !important; margin-top: 0 !important">
-  Bahasa Inggris
-</H4>_______________
-</a>
-</div>
-
-
-<div class="col-sm-3" style="padding-top: 20px;">
-  <a class="btn btn-primary col-sm-10" href="<?php echo base_url()?>index.php/hasil/tampil/7">
-  <H4 style="padding-top: 0 !important; margin-top: 0 !important">
-  Seni Budaya
-</H4>_______________
-</a>
-</div>
-
-
-<div class="col-sm-3" style="padding-top: 20px;">
-  <a class="btn btn-primary col-sm-10" href="<?php echo base_url()?>index.php/hasil/tampil/8">
-  <H4 style="padding-top: 0 !important; margin-top: 0 !important">
-  Pendidikan Jasmani
-</H4>_______________
-</a>
-</div>
-
-<div class="col-sm-12">
-<h2 style="margin-top: 20px;">Mata Pelajaran Pilihan</h2>
-
-<div class="col-sm-3" style="padding-top: 20px;">
-  <a class="btn btn-info col-sm-10" href="<?php echo base_url()?>index.php/hasil/tampil/5">
-  
-  <H4 style="padding-top: 0 !important; margin-top: 0 !important">
-  
-</H4>_______________
-</a>
-</div>
-
-<div class="col-sm-3" style="padding-top: 20px;">
-  <a class="btn btn-info col-sm-10" href="<?php echo base_url()?>index.php/hasil/tampil/6">
-  <H4 style="padding-top: 0 !important; margin-top: 0 !important">
-  
-</H4>_______________
-</a>
-</div>
-
-
-<div class="col-sm-3" style="padding-top: 20px;">
-  <a class="btn btn-info col-sm-10" href="<?php echo base_url()?>index.php/hasil/tampil/7">
-  <H4 style="padding-top: 0 !important; margin-top: 0 !important">
-  
-</H4>_______________
-</a>
-</div>
-
-
-<div class="col-sm-3" style="padding-top: 20px;">
-  <a class="btn btn-info col-sm-10" href="<?php echo base_url()?>index.php/hasil/tampil/8">
-  <H4 style="padding-top: 0 !important; margin-top: 0 !important">
-</H4>_______________
-</a>
-</div>    
-</div>
-
-
+                <div class="col-sm-12" >
+                    <?php
+                        $i = 1;
+                        foreach ($data_mata_pelajaran->result() as $row) {
+                            if($row->status_mapel == "pilihan"){
+                    ?>
+                    <div class="col-sm-3" style="margin-bottom: 20px;">
+                        <a style="width: 90%" href="<?php echo base_url()?>index.php/hasil/tampil/<?php echo $row->id_guru ?>" type="button"  class="btn btn-white btn-primary">
+                            <h4><?php echo $row->mata_pelajaran ?></h4>
+                            <h5><?php echo $row->nama_guru ?></h5>
+                        </a>
+                        
+                    </div>
+                    <?php
+                            }
+                        }
+                    ?>
+                </div>
 
 
 

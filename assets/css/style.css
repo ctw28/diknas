@@ -15,3 +15,141 @@ th, td, input {
 .nama{
 	text-align: left;
 }
+
+h2{
+	text-transform: uppercase;
+	text-align: center;
+	margin-bottom: 30px !important;
+}
+
+.attention{
+	color: red !important;
+	border: 1px solid red !important;
+}
+
+.focus {
+  background-color: #ff00ff;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+.pageNumber {
+  padding: 15px;
+}
+.mata_pelajaran{
+	text-transform: uppercase;
+	text-align: center !important;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+input { 
+	width: 50px;
+	background-color: red;
+	font-size: 13px !important;
+}
+
+/*.pertemuan{
+	text-transform: uppercase;
+	font-weight: bold;
+}
+*/
+.title_utama{
+	font-size: 14px; 
+	text-align: center; 
+	text-transform: uppercase;
+}
+
+th, td, input {
+	text-align: center;
+}
+
+.nama{
+	text-align: left;
+}
+
+table {
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    width: 100% !important;
+    border: 1px solid #ddd !important;
+}
+
+th, td {
+    text-align: center !important; 
+    padding: 8px !important;
+}
+
+th{
+	padding: 10px 20px !important;
+	text-align: center !important;
+}
+
+tr:nth-child(even){background-color: #f2f2f2 !important}
+
+table.dataTable thead>tr>td.sorting,
+table.dataTable thead>tr>td.sorting_asc,
+table.dataTable thead>tr>td.sorting_desc,
+table.dataTable thead>tr>th.sorting,
+table.dataTable thead>tr>th.sorting_asc,
+table.dataTable thead>tr>th.sorting_desc {
+  padding-right: 30px
+}
+
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_asc_disabled,
+table.dataTable thead .sorting_desc,
+table.dataTable thead .sorting_desc_disabled {
+  cursor: pointer;
+  position: relative
+}
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+  position: absolute;
+  bottom: .9em;
+  display: block;
+  opacity: .3
+}
+
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:before {
+  right: 1em;
+  content: "\f0de";
+  font-family: FontAwesome;
+  font-size: 1rem
+}
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc_disabled:after {
+  content: "\f0dd";
+  font-family: FontAwesome;
+  right: 16px;
+  font-size: 1rem
+}
+
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_desc:after {
+  opacity: 1
+}
+
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc_disabled:after {
+  opacity: 0
+}
+

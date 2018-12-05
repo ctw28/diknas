@@ -9,10 +9,9 @@ class Keterampilan extends CI_Controller {
 		if($this->session->userdata('logged_in'))
    		{
 		 	$session_data = $this->session->userdata('logged_in');
-			$isi['nama'] = $session_data['nama_guru']; 
-			$isi['id_guru'] = $session_data['id_guru'];
-			$isi['mata_pelajaran'] = $session_data['mata_pelajaran'];
-		}	
+			$isi['nama'] = $session_data['nama_wali_kelas']; 
+			$isi['kelas'] = $session_data['kelas'];
+		}
 		// $isi['content'] = 'keterampilan-view';
 		$kunci =  $this->uri->segment(3);
 
