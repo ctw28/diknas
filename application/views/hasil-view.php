@@ -604,25 +604,62 @@ $no = 1;
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Detail Nilai</h4>
+        <h4 class="modal-title" style="text-align: center;">Detail Nilai <b><span id="detail_nama"></span></b></h4>
       </div>
       <div class="modal-body">
-        <table>
-            <thead>
-                <tr>
-                    <th>Kompetensi</th>
-                    <th>Pertemuan 1</th>
-                    <th>Pertemuan 2</th>
-                    <th>Pertemuan 3</th>
-                    <th>Rata-Rata</th>
-                </tr>
-            </thead>
-            <tbody id="detail-nilai">
+        <p>Mata Pelajaran : Matematika</b></p>
 
-            </tbody>
-        </table>
+        <ul class="nav nav-tabs" id="myTab" >
+            <li class="active" style="background-color: red;">
+                <a  data-toggle="tab" href="#pengetahuan">
+                    Pengetahuan
+                </a>
+            </li>
+
+            <li>
+                <a style="background-color: yellow !important; color:black" data-toggle="tab" href="#keterampilan">
+                    Keterampilan
+                </a>
+            </li>
+            <li ;">
+                <a style="background-color: #336633 !important; color:white" data-toggle="tab" href="#sikap">
+                    Sikap
+                </a>
+            </li>
+        </ul>
+
+
+        <div class="tab-content">
+            <div id="pengetahuan" class="tab-pane fade in active">
+                <table>
+                    <thead style="background-color: #336633; color:white">
+                        <tr>
+                            <th>Kompetensi</th>
+                            <th>P 1</th>
+                            <th>P 2</th>
+                            <th>P 3</th>
+                            <th>Rata-Rata</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detail-nilai">
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="keterampilan" class="tab-pane fade">
+                <p>Keterampilan</p>
+            </div>
+            <div id="sikap" class="tab-pane fade">
+                <p>Sikap</p>
+            </div>
+
+        </div>
+
+        
       </div>
       <div class="modal-footer">
+        <p style="float: left; text-align: left;">Ket : <br>P = Pertemuan, K = Kinerja, S = Sikap</p>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -680,32 +717,40 @@ $no = 1;
                     // data: $('#'+($(this).attr('id')).slice(0,-3)).serialize(),
                     dataType: 'json',
                     success: function(data){
+                        // $('#'+siswanya+'uas_1').val()
                         isinya = '';
                         warna_1 = '';
                         warna_2 = '';
                         warna_3 = '';
                         warna_rerata = '';
+                        warna_total = '';
+                        warna_uts = '';
+                        warna_uas = '';
+                        warna_nilai_akhir = '';
+                        nilai_pengetahuan = 0;
 
                     // var data = JSON.parse(this.responseText);
                         console.log(data);
                         no=1;
                         rerata = 0;
-                        for(var i=0; i<data.length; i++){
-                            pertemuan1 = data[i][0];
-                            pertemuan2 = data[i][1];
-                            pertemuan3 = data[i][2];
+                        total = 0;
+                        for(var i=1; i<=10; i++){
+                            pertemuan1 = data['kd'+i][0];
+                            pertemuan2 = data['kd'+i][1];
+                            pertemuan3 = data['kd'+i][2];
+                            console.log(pertemuan1);
 
                             rerata = ((parseInt(pertemuan1)+parseInt(pertemuan2)+parseInt(pertemuan3))/3).toFixed(0);
-                            if(data[i][0] < 75)
+                            if(data['kd'+i][0] < 75)
                                 warna_1 = 'red';
                             else
                                 warna_1 = '';
 
-                            if(data[i][1] < 75)
+                            if(data['kd'+i][1] < 75)
                                 warna_2 = 'red';
                             else
                                 warna_2 = '';
-                            if(data[i][2] < 75)
+                            if(data['kd'+i][2] < 75)
                                 warna_3 = 'red';
                             else
                                 warna_3 = '';
@@ -716,13 +761,52 @@ $no = 1;
 
                             isinya +="<tr>";
                             isinya +="<td>KD"+no+"</td>";
-                            isinya +="<td style='color:"+warna_1+"'>"+data[i][0]+"</td>";
-                            isinya +="<td style='color:"+warna_2+"'>"+data[i][1]+"</td>";
-                            isinya +="<td style='color:"+warna_3+"'>"+data[i][2]+"</td>";
-                            isinya +="<td style='color:"+warna_rerata+"'>"+rerata+"</td>";
+                            isinya +="<td style='color:"+warna_1+"'>"+data['kd'+i][0]+"</td>";
+                            isinya +="<td style='color:"+warna_2+"'>"+data['kd'+i][1]+"</td>";
+                            isinya +="<td style='color:"+warna_3+"'>"+data['kd'+i][2]+"</td>";
+                            isinya +="<td style='color:"+warna_rerata+"'><b>"+rerata+"</b></td>";
                             isinya +="</tr>";
                             no++;
+                            total = parseInt(total) + parseInt(rerata); 
                         }
+                        document.getElementById('detail_nama').innerHTML = data['nama'];
+                        nilai_pengetahuan = ((total/10)+parseInt(data['uts'])+parseInt(data['uas']))/3;
+                            if((total/10) < 75)
+                                warna_total = 'red';
+                            else
+                                warna_total = 'green';
+                            if(data['uts'] < 75)
+                                warna_uts = 'red';
+                            else
+                                warna_uts = 'green';
+                            if(data['uas'] < 75)
+                                warna_uas = 'red';
+                            else
+                                warna_uas = 'green';
+                            if(nilai_pengetahuan < 75)
+                                warna_nilai_akhir = 'red';
+                            else
+                                warna_nilai_akhir = 'green';
+
+                        // document.getElementById('detail_uas').innerHTML = data['uas'];
+                        // document.getElementById('detail_uts').innerHTML = data['uts'];
+                        isinya +="<tr>";
+                        isinya +="<td colspan=4>RATA-RATA TOTAL</td>";
+                        isinya +="<td style='color:"+warna_total+"'><b>"+total/10+"</b></td>";
+                        isinya +="</tr>";
+                        isinya +="<tr>";
+                        isinya +="<td colspan=4>NILAI UTS</td>";
+                        isinya +="<td style='color:"+warna_uts+"'><b>"+data['uts']+"</b></td>";
+                        isinya +="</tr>";
+                        isinya +="<tr>";
+                        isinya +="<td colspan=4>NILAI UAS</td>";
+                        isinya +="<td style='color:"+warna_uas+"'><b>"+data['uas']+"</b></td>";
+                        isinya +="</tr>";
+                        isinya +="<tr>";
+                        isinya +="<td colspan=4><b>NILAI PENGETAHUAN</b></td>";
+                        isinya +="<td style='color:"+warna_nilai_akhir+"'><b>"+nilai_pengetahuan.toFixed(0)+"</b></td>";
+                        isinya +="</tr>";
+
                         document.getElementById('detail-nilai').innerHTML = isinya;
                     },
                     error: function(){

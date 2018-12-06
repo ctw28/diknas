@@ -30,21 +30,24 @@ class Pengetahuan extends CI_Controller {
 		$data_pengetahuan = $this->pengetahuan_model->get_data_pengetahuan_siswa_mapel($mapel, $siswa);	
 
 		$data = array();
-
-		$j=0;
+		$i=0;
 		foreach ($data_pengetahuan -> result() as $row) {
-			$i=0;
-				$data[$i][$j] = $row->kd1;
-				$data[$i+1][$j] = $row->kd2;
-				$data[$i+2][$j] = $row->kd3;
-				$data[$i+3][$j] = $row->kd4;
-				$data[$i+4][$j] = $row->kd5;
-				$data[$i+5][$j] = $row->kd6;
-				$data[$i+6][$j] = $row->kd7;
-				$data[$i+7][$j] = $row->kd8;
-				$data[$i+8][$j] = $row->kd9;
-				$data[$i+9][$j] = $row->kd10;
-			$j++;
+				if($i==0){
+					$data['uas'] = $row->uas;
+					$data['uts'] = $row->uts;					
+				}
+				$data['nama'] = $row->nama_siswa;
+				$data['kd1'][] = $row->kd1;
+				$data['kd2'][] = $row->kd2;
+				$data['kd3'][] = $row->kd3;
+				$data['kd4'][] = $row->kd4;
+				$data['kd5'][] = $row->kd5;
+				$data['kd6'][] = $row->kd6;
+				$data['kd7'][] = $row->kd7;
+				$data['kd8'][] = $row->kd8;
+				$data['kd9'][] = $row->kd9;
+				$data['kd10'][] = $row->kd10;
+				$i++;
 		}
 			// echo $data[0]->kd1;
 		// while ($row = mysqli_fetch_assoc($data_pengetahuan)) {
