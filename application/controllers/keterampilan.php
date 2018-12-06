@@ -55,4 +55,34 @@ class Keterampilan extends CI_Controller {
 		}
 
 	}
+
+	public function get_keterampilan(){
+		$mapel =  $this->uri->segment(3);
+		$siswa =  $this->uri->segment(4);
+		$this->load->model('keterampilan_model');
+
+		// echo json_encode(array('status' => 'aaa'));
+		$data_keterampilan = $this->keterampilan_model->get_data_keterampilan_siswa_mapel($mapel, $siswa);	
+
+		$data_sikap = array();
+		foreach ($data_keterampilan -> result() as $row) {
+				$data_sikap['k1'] = $row->k1;
+				$data_sikap['k2'] = $row->k2;
+				$data_sikap['k3'] = $row->k3;
+				$data_sikap['k4'] = $row->k4;
+				$data_sikap['k5'] = $row->k5;
+				$data_sikap['k6'] = $row->k6;
+				$data_sikap['k7'] = $row->k7;
+				$data_sikap['k8'] = $row->k8;
+				$data_sikap['k9'] = $row->k9;
+				$data_sikap['k10'] = $row->k10;
+		}
+			// echo $data[0]->kd1;
+		// while ($row = mysqli_fetch_assoc($data_pengetahuan)) {
+		// 	$data[] = $row;
+		// }
+
+		echo json_encode($data_sikap);	
+
+	}	
 }

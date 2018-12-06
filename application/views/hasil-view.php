@@ -648,10 +648,36 @@ $no = 1;
             </div>
 
             <div id="keterampilan" class="tab-pane fade">
-                <p>Keterampilan</p>
+                <table>
+                    <thead style="background-color: #336633; color:white">
+                        <tr>
+                            <th>Kinerja</th>
+                            <th>Nilai</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detail-keterampilan">
+
+                    </tbody>
+                </table>
             </div>
             <div id="sikap" class="tab-pane fade">
-                <p>Sikap</p>
+                <table>
+                    <thead style="background-color: #336633; color:white">
+                        <tr>
+                            <th>Sikap</th>
+                            <th>PP</th>
+                            <th>PS</th>
+                            <th>PD</th>
+                            <th>PBJ</th>
+                            <th>PKJ</th>
+                            <th>PPD</th>
+                            <th>Rata-Rata</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detail-sikap">
+
+                    </tbody>
+                </table>
             </div>
 
         </div>
@@ -730,7 +756,7 @@ $no = 1;
                         nilai_pengetahuan = 0;
 
                     // var data = JSON.parse(this.responseText);
-                        console.log(data);
+                        // console.log(data);
                         no=1;
                         rerata = 0;
                         total = 0;
@@ -738,7 +764,6 @@ $no = 1;
                             pertemuan1 = data['kd'+i][0];
                             pertemuan2 = data['kd'+i][1];
                             pertemuan3 = data['kd'+i][2];
-                            console.log(pertemuan1);
 
                             rerata = ((parseInt(pertemuan1)+parseInt(pertemuan2)+parseInt(pertemuan3))/3).toFixed(0);
                             if(data['kd'+i][0] < 75)
@@ -760,7 +785,7 @@ $no = 1;
                                 warna_rerata = 'green';
 
                             isinya +="<tr>";
-                            isinya +="<td>KD"+no+"</td>";
+                            isinya +="<td>KD "+no+"</td>";
                             isinya +="<td style='color:"+warna_1+"'>"+data['kd'+i][0]+"</td>";
                             isinya +="<td style='color:"+warna_2+"'>"+data['kd'+i][1]+"</td>";
                             isinya +="<td style='color:"+warna_3+"'>"+data['kd'+i][2]+"</td>";
@@ -813,6 +838,168 @@ $no = 1;
                         alert('ada kesalahan jaringan');
                     }
                 }); 
+
+
+
+            $.ajax({
+                    url: "<?php echo base_url() ?>index.php/keterampilan/get_keterampilan/<?php echo $kunci ?>/"+btn,
+                    type: "POST",
+                    dataType: 'json',
+                    success: function(data){
+                        isinya = '';
+                        warna_1 = '';
+                        nilai_keterampilan = 0;
+                        warna_nilai_akhir = '';
+                        nil_keterampilan = 0;
+
+                        no=1;
+                        rerata = 0;
+                        total = 0;
+                        for(var i=1; i<=10; i++){
+                            nil_keterampilan = data['k'+i]/3*100;
+                            console.log('nilai keterampilan  = '+nil_keterampilan);
+                            if(nil_keterampilan < 75)
+                                warna_1 = 'red';
+                            else
+                                warna_1 = 'green';
+
+
+                            isinya +="<tr>";
+                            isinya +="<td>K"+no+"</td>";
+                            isinya +="<td style='color:"+warna_1+"'>"+nil_keterampilan.toFixed(0)+"</td>";
+                            isinya +="</tr>";
+                            no++;
+                            total = parseInt(total) + parseInt(nil_keterampilan); 
+                        }
+
+                        nilai_keterampilan = total/10;
+                        if(nilai_keterampilan < 75)
+                            warna_nilai_akhir = 'red';
+                        else
+                            warna_nilai_akhir = 'green';
+
+                        isinya +="<tr>";
+                        isinya +="<td><b>NILAI KETERAMPILAN</b></td>";
+                        isinya +="<td style='color:"+warna_nilai_akhir+"'><b>"+nilai_keterampilan.toFixed(0)+"</b></td>";
+                        isinya +="</tr>";
+
+                        document.getElementById('detail-keterampilan').innerHTML = isinya;
+                    },
+                    error: function(){
+                        alert('ada kesalahan jaringan');
+                    }
+                }); 
+
+            $.ajax({
+                    url: "<?php echo base_url() ?>index.php/sikap/get_sikap/<?php echo $kunci ?>/"+btn,
+                    type: "POST",
+                    // data: $('#'+($(this).attr('id')).slice(0,-3)).serialize(),
+                    dataType: 'json',
+                    success: function(data){
+                        // $('#'+siswanya+'uas_1').val()
+                        isinya = '';
+                        warna_1 = '';
+                        warna_2 = '';
+                        warna_3 = '';
+                        warna_4 = '';
+                        warna_5 = '';
+                        warna_6 = '';
+                        warna_rerata = '';
+                        warna_total = '';
+                        warna_nilai_akhir = '';
+                        nilai_sikap = 0;
+
+                    // var data = JSON.parse(this.responseText);
+                        // console.log(data);
+                        no=1;
+                        rerata = 0;
+                        total = 0;
+                        for(var i=1; i<=10; i++){
+                            sikap1 = data['s'+i][0]
+                            sikap2 = data['s'+i][1];
+                            sikap3 = data['s'+i][2];
+                            sikap4 = data['s'+i][3];
+                            sikap5 = data['s'+i][4];
+                            sikap6 = data['s'+i][5];
+
+                            rerata = ((parseInt(sikap1)+parseInt(sikap2)+parseInt(sikap3)+parseInt(sikap4)+parseInt(sikap5)+parseInt(sikap6))/16*100).toFixed(0);
+                            if(sikap1 < 75)
+                                warna_1 = 'red';
+                            else
+                                warna_1 = '';
+
+                            if(sikap2 < 75)
+                                warna_2 = 'red';
+                            else
+                                warna_2 = '';
+
+                            if(sikap3 < 75)
+                                warna_3 = 'red';
+                            else
+                                warna_3 = '';
+
+                            if(sikap4 < 75)
+                                warna_4 = 'red';
+                            else
+                                warna_4 = '';
+
+                            if(sikap5 < 75)
+                                warna_5 = 'red';
+                            else
+                                warna_5 = '';
+
+                            if(sikap6 < 75)
+                                warna_6 = 'red';
+                            else
+                                warna_6 = '';
+
+                            if(rerata < 75)
+                                warna_rerata = 'red';
+                            else
+                                warna_rerata = 'green';
+
+                            isinya +="<tr>";
+                            isinya +="<td>S"+no+"</td>";
+                            isinya +="<td style='color:"+warna_1+"'>"+sikap1+"</td>";
+                            isinya +="<td style='color:"+warna_2+"'>"+sikap2+"</td>";
+                            isinya +="<td style='color:"+warna_3+"'>"+sikap3+"</td>";
+                            isinya +="<td style='color:"+warna_4+"'>"+sikap4+"</td>";
+                            isinya +="<td style='color:"+warna_5+"'>"+sikap5+"</td>";
+                            isinya +="<td style='color:"+warna_6+"'>"+sikap6+"</td>";
+                            isinya +="<td style='color:"+warna_rerata+"'><b>"+rerata+"</b></td>";
+                            isinya +="</tr>";
+                            no++;
+                            total = parseInt(total) + parseInt(rerata); 
+                        }
+                        nilai_sikap = total/10;
+                            if((total) < 75)
+                                warna_total = 'red';
+                            else
+                                warna_total = 'green';
+
+                            if(nilai_sikap < 75)
+                                warna_nilai_akhir = 'red';
+                            else
+                                warna_nilai_akhir = 'green';
+
+                        isinya +="<tr>";
+                        isinya +="<td colspan=7>RATA-RATA TOTAL</td>";
+                        isinya +="<td style='color:"+warna_total+"'><b>"+total/10+"</b></td>";
+                        isinya +="</tr>";
+                        isinya +="<td colspan=7><b>NILAI SIKAP</b></td>";
+                        isinya +="<td style='color:"+warna_nilai_akhir+"'><b>"+nilai_sikap.toFixed(0)+"</b></td>";
+                        isinya +="</tr>";
+
+                        document.getElementById('detail-sikap').innerHTML = isinya;
+                    },
+                    error: function(){
+                        alert('ada kesalahan jaringan');
+                    }
+                }); 
+
+
+
+
         
         });
 

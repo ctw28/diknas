@@ -52,4 +52,37 @@ class Sikap extends CI_Controller {
 		}
 
 	}
+
+
+
+	public function get_sikap(){
+		$mapel =  $this->uri->segment(3);
+		$siswa =  $this->uri->segment(4);
+		$this->load->model('sikap_model');
+
+		// echo json_encode(array('status' => 'aaa'));
+		$data_pengetahuan = $this->sikap_model->get_data_sikap_siswa_mapel($mapel, $siswa);	
+
+		$data = array();
+		$i=0;
+		foreach ($data_pengetahuan -> result() as $row) {
+				$data['s1'][] = $row->sikap1;
+				$data['s2'][] = $row->sikap2;
+				$data['s3'][] = $row->sikap3;
+				$data['s4'][] = $row->sikap4;
+				$data['s5'][] = $row->sikap5;
+				$data['s6'][] = $row->sikap6;
+				$data['s7'][] = $row->sikap7;
+				$data['s8'][] = $row->sikap8;
+				$data['s9'][] = $row->sikap9;
+				$data['s10'][] = $row->sikap10;
+		}
+			// echo $data[0]->kd1;
+		// while ($row = mysqli_fetch_assoc($data_pengetahuan)) {
+		// 	$data[] = $row;
+		// }
+
+		echo json_encode($data);	
+
+	}
 }
