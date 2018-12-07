@@ -33,7 +33,7 @@
     </head>
 
     <body class="no-skin">
-        <div id="navbar" class="navbar navbar-default ace-save-state" style="background-color: red !important;">
+        <div id="navbar" class="navbar navbar-default ace-save-state" style="background-color: #2E8965 !important;">
             <div class="navbar-container ace-save-state" id="navbar-container">
                 <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
                     <span class="sr-only">Toggle sidebar</span>
@@ -51,7 +51,7 @@
                 <div class="navbar-buttons navbar-header pull-right" role="navigation">
                     <ul class="nav ace-nav">
                         <li class="light-blue dropdown-modal">
-                            <a data-toggle="dropdown" href="#" class="dropdown-toggle" style="background-color: red !important;">
+                            <a data-toggle="dropdown" href="#" class="dropdown-toggle" style="background-color: #2E8965 !important;">
                                 <img class="nav-user-photo" src="<?php echo base_url()?>assets/images/man.png" alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
@@ -62,7 +62,7 @@
                             </a>
 
                             <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                                <li><a href="#"><i class="ace-icon fa fa-power-off"></i>Logout</a></li>
+                                <li><a href="<?php echo base_url()?>index.php/logout"><i class="ace-icon fa fa-power-off"></i>Logout</a></li>
                             </ul>
 
                         </li>
@@ -158,53 +158,142 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <h2 style="text-transform: uppercase;">Daftar Mata Pelajaran Wajib</h2>
+                                <!-- <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="infobox infobox-green infobox-large infobox-dark">
+                                            <div class="infobox-progress">
+                                                <div class="easy-pie-chart percentage" data-percent="61" data-size="39" style="height: 39px; width: 39px; line-height: 38px;">
+                                                    <span class="percent">40</span>
+                                                <canvas height="39" width="39"></canvas></div>
+                                            </div>
+
+                                            <div class="infobox-data">
+                                                <div class="infobox-content">Total</div>
+                                                <div class="infobox-content">SISWA</div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="infobox infobox-blue infobox-large infobox-dark">
+                                            <div class="infobox-progress">
+                                                <div class="easy-pie-chart percentage" data-percent="61" data-size="39" style="height: 39px; width: 39px; line-height: 38px;">
+                                                    <span class="percent">9</span>
+                                                <canvas height="39" width="39"></canvas></div>
+                                            </div>
+
+                                            <div class="infobox-data">
+                                                <div class="infobox-content">Total</div>
+                                                <div class="infobox-content">MATA PELAJARAN</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div> -->
                                         
 
-                <div class="col-sm-12" >
-                    <?php
-                        $i = 1;
-                        foreach ($data_mata_pelajaran->result() as $row) {
-                            if($row->status_mapel == "wajib"){
-                    ?>
-                    <div class="col-sm-3" style="margin-bottom: 20px;">
-                        <a style="width: 90%" href="<?php echo base_url()?>index.php/hasil/tampil/<?php echo $row->id_guru ?>" type="button"  class="btn btn-white btn-primary">
-                            <h4><?php echo $row->mata_pelajaran ?></h4>
-                            <h5><?php echo $row->nama_guru ?></h5>
-                        </a>
-                        
-                    </div>
-                    <?php
-                        }
-                        }
-                    ?>
-                </div>
 
-                                <h2 style="text-transform: uppercase;">Daftar Mata Pelajaran Pilihan</h2>
-                                        
+                                        <div class="col-xs-12 col-sm-6 widget-container-col" id="widget-container-col-2" style="text-align: left !important;">
+                                            <div class="widget-box widget-color-green2" id="widget-box-2" data-color="#2E8965">
+                                                <div class="widget-header">
+                                                    <h5 class="widget-title bigger lighter">
+                                                        <i class="ace-icon fa fa-table"></i>
+                                                        Daftar Mata Pelajaran Wajib
+                                                    </h5>
 
-                <div class="col-sm-12" >
-                    <?php
-                        $i = 1;
-                        foreach ($data_mata_pelajaran->result() as $row) {
-                            if($row->status_mapel == "pilihan"){
-                    ?>
-                    <div class="col-sm-3" style="margin-bottom: 20px;">
-                        <a style="width: 90%" href="<?php echo base_url()?>index.php/hasil/tampil/<?php echo $row->id_guru ?>" type="button"  class="btn btn-white btn-primary">
-                            <h4><?php echo $row->mata_pelajaran ?></h4>
-                            <h5><?php echo $row->nama_guru ?></h5>
-                        </a>
-                        
-                    </div>
-                    <?php
-                            }
-                        }
-                    ?>
-                </div>
+                                                    
+                                                </div>
+
+                                                <div class="widget-body">
+                                                    <div class="widget-main no-padding">
+                                                        <table>
+                                                            <thead style="border-bottom: 1px solid #2E8965 !important">
+                                                                <tr>
+                                                                    <th>No</th>
+                                                                    <th>Mata Pelajaran</th>
+                                                                    <th>Nama Guru</th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody >
+                                                                <?php
+                                                                    $i = 1;
+                                                                    foreach ($data_mata_pelajaran->result() as $row) {
+                                                                        if($row->status_mapel == "wajib"){
+                                                                ?>
+                                                                <tr  style="border-bottom: 1px solid #2E8965 !important">
+                                                                    <td><?php echo $i ?></td>
+                                                                    <td style="text-align: left !important">
+                                                                        <a style="width: 90%" href="<?php echo base_url()?>index.php/hasil/tampil/<?php echo $row->id_guru ?>">
+                                                                        <?php echo $row->mata_pelajaran ?>
+                                                                        </a>
+                                                                    </td>
+                                                                    <td style="text-align: left !important"><?php echo $row->nama_guru ?></td>
+                                                                    
+                                                                </tr>
+                                                                <?php
+                                                                    $i++;
+                                                                    }
+                                                                    }
+                                                                ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.span -->
+
+                                        <div class="col-xs-12 col-sm-6 widget-container-col" id="widget-container-col-2">
+                                            <div class="widget-box widget-color-green2" id="widget-box-2">
+                                                <div class="widget-header">
+                                                    <h5 class="widget-title bigger lighter">
+                                                        <i class="ace-icon fa fa-table"></i>
+                                                        Daftar Mata Pelajaran Pilihan
+                                                    </h5>
+
+                                                    
+                                                </div>
+
+                                                <div class="widget-body">
+                                                    <div class="widget-main no-padding">
+                                                        <table>
+                                                            <thead style="border-bottom: 1px solid #2E8965 !important">
+                                                                <tr>
+                                                                    <th>No</th>
+                                                                    <th>Mata Pelajaran</th>
+                                                                    <th>Nama Guru</th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php
+                                                                    $i = 1;
+                                                                    foreach ($data_mata_pelajaran->result() as $row) {
+                                                                        if($row->status_mapel == "pilihan"){
+                                                                ?>
+                                                                <tr style="border-bottom: 1px solid #2E8965 !important">
+                                                                    <td><?php echo $i ?></td>
+                                                                    <td style="text-align: left !important">
+                                                                        <a style="width: 90%" href="<?php echo base_url()?>index.php/hasil/tampil/<?php echo $row->id_guru ?>">
+                                                                        <?php echo $row->mata_pelajaran ?>
+                                                                        </a>
+                                                                    </td>
+                                                                    <td style="text-align: left !important"><?php echo $row->nama_guru ?></td>
+                                                                   
+                                                                </tr>
+                                                                <?php
+                                                                 $i++;
+                                                                    }
+                                                                    }
+                                                                ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.span -->
 
 
-
-
+                              
 
 
 

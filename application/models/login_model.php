@@ -13,7 +13,8 @@ class Login_model extends CI_model {
 				$sess_admin = array('kelas' => $row_admin->kelas,
 							  'nama_wali_kelas' => $row_admin->nama_wali_kelas);
 				$this->session->set_userdata('logged_in', $sess_admin);
-		        // simpan_log("<b>".$sess_admin['nama_admin']."</b> login");        
+				// $this->session->mark_as_temp('logged_in', 10);
+		        // simpan_log("<b>".$sess_admin['nama_admin']."</b> login");
 				redirect('dashboard');
 				// echo $row_admin->nama_guru." ".$row_admin->mata_pelajaran;
 			}

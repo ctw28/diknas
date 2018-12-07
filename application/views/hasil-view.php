@@ -159,34 +159,54 @@
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
 
-                    
-
-
-<?php 
+                                        <div class="col-xs-12 col-sm-12 widget-container-col" id="widget-container-col-2" style="text-align: center !important;">
+                                            <div class="widget-box widget-color-green2" id="widget-box-2" data-color="#2E8965">
+                                                <div class="widget-header">
+                                                    <h5 class="widget-title bigger lighter">
+                                                        Daftar Nilai <?php 
 $aaa = 1;
 foreach ($data_pengetahuan->result() as $row) {
     if ($aaa==1) {
-    echo "<h2 style='text-transform: uppercase;'>Mata Pelajaran : $row->mata_pelajaran</h2>";
-    echo "<h3>Nama Guru : $row->nama_guru</h3>";
+    echo "Mata Pelajaran : $row->mata_pelajaran</h5>";
+    echo "<h5>Nama Guru : $row->nama_guru</h5>";
     }
     $aaa++;
 }
 ?>
+                                                    
+
+                                                    
+                                                </div>
+
+                                                <div class="widget-body">
+                                                    <div class="widget-main no-padding">
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.span -->
+
+
+
 
 
                             <div class="col-sm-12">
-                                <a href="<?php echo base_url()?>index.php/pengetahuan/tampil/<?php echo $kunci ?>">Lihat Proses Pengetahuan</a>
+                                <!-- <a href="<?php echo base_url()?>index.php/pengetahuan/tampil/<?php echo $kunci ?>">Lihat Proses Pengetahuan</a> -->
 
         <table border="0" cellpadding="5" id="simple-table" align="center" class="table  table-bordered table-hover">
             <thead>
                 <tr> 
-                    <th>NO</th>
-                    <th>NAMA</th>
+                    <th rowspan="2">NO</th>
+                    <th rowspan="2">NAMA</th>
+                    <th colspan="3">NILAI</th>
+                    <th rowspan="2">AKSI</th>
+                </tr>
+                <tr>
                     <th>PENGETAHUAN</th>
                     <th>KETERAMPILAN</th>
-                    <th>SIKAP</th>
-                    <th>AKSI</th>
+                    <th>SIKAP</th>                    
                 </tr>
+
             </thead>
                 <tbody>
                     <?php
@@ -552,7 +572,7 @@ $no = 1;
                                             }
                                             if($i == 1){
                                         ?>
-                                        <tr> 
+                                        <tr style="text-align: left !important;"> 
                                             <td><?php echo $no ?></td>
                                             <td class="nama"><?php echo $row->nama_siswa ?></td>
                                             <td>
@@ -565,7 +585,7 @@ $no = 1;
                                                 <?php echo number_format($rerata_sikap[$j]) ?>
                                             </td>
                                             <td>
-                                                <a type="button" title="<?php echo $row->id_siswa ?>" data-toggle="modal" data-target="#myModal" title="Lihat Detail" id="<?php echo $row->id_siswa ?>" class="btn btn-xs btn-info">
+                                                <a type="button" title="<?php echo $row->id_siswa ?>" data-toggle="modal" data-target="#myModal" title="Lihat Detail" id="<?php echo $row->id_siswa ?>" class="btn btn-xs btn-primary">
                                                     <i class="ace-icon fa fa-eye bigger-120"></i>
                                                 </a>
                                                 <a href="<?php echo base_url()?>index.php/hasil/cetak/<?php echo $row->id_siswa ?>" title="Cetak" id="<?php echo $row->no_induk ?><?php echo $i ?>kd1" class="btn btn-xs btn-success">
@@ -622,7 +642,7 @@ $no = 1;
                 </a>
             </li>
             <li ;">
-                <a style="background-color: #336633 !important; color:white" data-toggle="tab" href="#sikap">
+                <a style="background-color: #2E8965 !important; color:white" data-toggle="tab" href="#sikap">
                     Sikap
                 </a>
             </li>
@@ -632,7 +652,7 @@ $no = 1;
         <div class="tab-content">
             <div id="pengetahuan" class="tab-pane fade in active">
                 <table>
-                    <thead style="background-color: #336633; color:white">
+                    <thead style="background-color: #2E8965; color:white">
                         <tr>
                             <th>Kompetensi</th>
                             <th>P 1</th>
@@ -649,7 +669,7 @@ $no = 1;
 
             <div id="keterampilan" class="tab-pane fade">
                 <table>
-                    <thead style="background-color: #336633; color:white">
+                    <thead style="background-color: #2E8965; color:white">
                         <tr>
                             <th>Kinerja</th>
                             <th>Nilai</th>
@@ -662,7 +682,7 @@ $no = 1;
             </div>
             <div id="sikap" class="tab-pane fade">
                 <table>
-                    <thead style="background-color: #336633; color:white">
+                    <thead style="background-color: #2E8965; color:white">
                         <tr>
                             <th>Sikap</th>
                             <th>PP</th>
@@ -915,7 +935,7 @@ $no = 1;
                         rerata = 0;
                         total = 0;
                         for(var i=1; i<=10; i++){
-                            sikap1 = data['s'+i][0]
+                            sikap1 = data['s'+i][0];
                             sikap2 = data['s'+i][1];
                             sikap3 = data['s'+i][2];
                             sikap4 = data['s'+i][3];
@@ -923,32 +943,32 @@ $no = 1;
                             sikap6 = data['s'+i][5];
 
                             rerata = ((parseInt(sikap1)+parseInt(sikap2)+parseInt(sikap3)+parseInt(sikap4)+parseInt(sikap5)+parseInt(sikap6))/16*100).toFixed(0);
-                            if(sikap1 < 75)
+                            if(data['s'+i][0]/2*100 < 75)
                                 warna_1 = 'red';
                             else
                                 warna_1 = '';
 
-                            if(sikap2 < 75)
+                            if(data['s'+i][1]/3*100 < 75)
                                 warna_2 = 'red';
                             else
                                 warna_2 = '';
 
-                            if(sikap3 < 75)
+                            if(data['s'+i][2]/2*100 < 75)
                                 warna_3 = 'red';
                             else
                                 warna_3 = '';
 
-                            if(sikap4 < 75)
+                            if(data['s'+i][3]/2*100 < 75)
                                 warna_4 = 'red';
                             else
                                 warna_4 = '';
 
-                            if(sikap5 < 75)
+                            if(data['s'+i][4]/4*100 < 75)
                                 warna_5 = 'red';
                             else
                                 warna_5 = '';
 
-                            if(sikap6 < 75)
+                            if(data['s'+i][5]/3*100 < 75)
                                 warna_6 = 'red';
                             else
                                 warna_6 = '';
@@ -960,12 +980,12 @@ $no = 1;
 
                             isinya +="<tr>";
                             isinya +="<td>S"+no+"</td>";
-                            isinya +="<td style='color:"+warna_1+"'>"+sikap1+"</td>";
-                            isinya +="<td style='color:"+warna_2+"'>"+sikap2+"</td>";
-                            isinya +="<td style='color:"+warna_3+"'>"+sikap3+"</td>";
-                            isinya +="<td style='color:"+warna_4+"'>"+sikap4+"</td>";
-                            isinya +="<td style='color:"+warna_5+"'>"+sikap5+"</td>";
-                            isinya +="<td style='color:"+warna_6+"'>"+sikap6+"</td>";
+                            isinya +="<td style='color:"+warna_1+"'>"+data['s'+i][0]/2*100+"</td>";
+                            isinya +="<td style='color:"+warna_2+"'>"+data['s'+i][1]/3*100+"</td>";
+                            isinya +="<td style='color:"+warna_3+"'>"+data['s'+i][2]/2*100+"</td>";
+                            isinya +="<td style='color:"+warna_4+"'>"+data['s'+i][3]/2*100+"</td>";
+                            isinya +="<td style='color:"+warna_5+"'>"+data['s'+i][4]/4*100+"</td>";
+                            isinya +="<td style='color:"+warna_6+"'>"+data['s'+i][5]/3*100+"</td>";
                             isinya +="<td style='color:"+warna_rerata+"'><b>"+rerata+"</b></td>";
                             isinya +="</tr>";
                             no++;

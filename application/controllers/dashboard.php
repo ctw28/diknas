@@ -5,6 +5,7 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
+		$this->keamanan_admin->keamanan();
 
 		$this->load->model('pengaturan_model');
 
