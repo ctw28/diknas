@@ -156,39 +156,61 @@
 
                     <div class="page-content">
                         <div class="row">
-                            <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <!-- <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="infobox infobox-green infobox-large infobox-dark">
-                                            <div class="infobox-progress">
-                                                <div class="easy-pie-chart percentage" data-percent="61" data-size="39" style="height: 39px; width: 39px; line-height: 38px;">
-                                                    <span class="percent">40</span>
-                                                <canvas height="39" width="39"></canvas></div>
-                                            </div>
 
-                                            <div class="infobox-data">
-                                                <div class="infobox-content">Total</div>
-                                                <div class="infobox-content">SISWA</div>
-                                            </div>
+                                <div class="col-xs-12 col-sm-12 widget-container-col" id="widget-container-col-2" style="text-align: left !important;">
+                                    <div class="widget-box widget-color-green2" id="widget-box-2" data-color="#2E8965">
+                                        <div class="widget-header">
+                                            <h5 class="widget-title bigger lighter">
+                                                <i class="ace-icon fa fa-pie-chart"></i>
+                                                Ringkasan Data
+                                            </h5>
                                         </div>
 
+                                        <div class="widget-body">
+                                            <div class="widget-main no-padding">
+                                    
+                                                <div class="infobox col-md-6" style="background-color: #2E8965; color: white;">
+                                                    <div class="infobox-progress">
+                                                            <h2 style="margin:0 !important;"><i class="fa fa-child"></i></h2>
+                                                    </div>
+                                                    <div class="infobox-data">
+                                                        <div class="infobox-content" style="color: white;">Total</div>
+                                                        <div class="infobox-content" style="color: white;">SISWA</div>
+                                                    </div>
+                                                </div>
+                                                <div class="infobox col-md-4" style="background-color: #2E8965; color: white;">
+                                                    <div class="infobox-progress">
+                                                            <h2 style="margin:0 !important;">9</h2>
+                                                    </div>
+                                                    <div class="infobox-data">
+                                                        <div class="infobox-content" style="color: white;">Total</div>
+                                                        <div class="infobox-content" style="color: white;">MATA PELAJARAN WAJIB</div>
+                                                    </div>
+                                                </div>
 
-                                        <div class="infobox infobox-blue infobox-large infobox-dark">
-                                            <div class="infobox-progress">
-                                                <div class="easy-pie-chart percentage" data-percent="61" data-size="39" style="height: 39px; width: 39px; line-height: 38px;">
-                                                    <span class="percent">9</span>
-                                                <canvas height="39" width="39"></canvas></div>
-                                            </div>
+                                                <div class="infobox col-md-4" style="background-color: #2E8965; color: white;">
+                                                    <div class="infobox-progress">
+                                                            <h2 style="margin:0 !important;">5</h2>
+                                                    </div>
+                                                    <div class="infobox-data">
+                                                        <div class="infobox-content" style="color: white;">Total</div>
+                                                        <div class="infobox-content" style="color: white;">MATA PELAJARAN PILIHAN</div>
+                                                    </div>
+                                                </div>
 
-                                            <div class="infobox-data">
-                                                <div class="infobox-content">Total</div>
-                                                <div class="infobox-content">MATA PELAJARAN</div>
+
+                                   
+                                    
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+
+
+                                
                                     
-                                </div> -->
+                       
                                         
 
 
