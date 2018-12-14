@@ -365,61 +365,107 @@ class Hasil extends CI_Controller {
 
 function cetak_detail(){
         $this->load->model('pengetahuan_model');
+        $this->load->model('keterampilan_model');
+        $this->load->model('sikap_model');
 
-        $kunci = $this->uri->segment(3);
+        $siswa = $this->uri->segment(4);
+        $mapel = $this->uri->segment(3);
 
         $pdf = new FPDF('l','mm','A4');
         $pdf->AddPage('L');
 
-        $pdf->SetFont('Arial','B',10);
-        $pdf->Cell(280,7,'DETAIL PENILAIAN PROSES BELAJAR',0,1,'C');
-        // Memberikan space kebawah agar tidak terlalu rapat
-        $pdf->SetFont('Arial','B',9);
-        $pdf->Cell(10,7,'',0,1);
-        $hasil = $this->pengetahuan_model->get_data_siswa($kunci);  
+        $hasil = $this->pengetahuan_model->get_data_pengetahuan_siswa_mapel($mapel, $siswa); 
         $nama = '';
         $no_induk = '';
-        // $nama_mata_pelajaran = '';
+        $nama_mata_pelajaran = '';
+        if ($hasil->num_rows()>0){
+
         foreach ($hasil -> result() as $row) {  
             $nama = $row->nama_siswa;
             $no_induk = $row->no_induk;
-            // $nama_mata_pelajaran = $row->mata_pelajaran;
+            $nama_mata_pelajaran = $row->mata_pelajaran;
         }
 
+        }
+        else{
+            echo "<script>alert('Maaf tidak ada data')</script>";
+            return;
+        }
+
+        $pdf->SetFont('Arial','B',10);
+        $pdf->Cell(280,7,'DETAIL PENILAIAN HASIL BELAJAR',0,1,'C');
+        $pdf->Cell(280,6,'MATA PELAJARAN : '.strtoupper($nama_mata_pelajaran),0,0, 'C');
+        $pdf->Cell(10,7,'',0,1);
+        // Memberikan space kebawah agar tidak terlalu rapat
+        $pdf->SetFont('Arial','B',9);
+        $pdf->Cell(10,7,'',0,1);
+
         $pdf->Cell(40,6,'NIM',0,0);
-        $pdf->Cell(80,6,': '.$no_induk,0,0);
+        $pdf->Cell(180,6,': '.$no_induk,0,0);
         $pdf->Cell(30,6,'KELAS',0,0);
         $pdf->Cell(26,6,': XII.IA.1',0,0);
         $pdf->Cell(10,7,'',0,1);
         $pdf->Cell(40,6,'NAMA SISWA',0,0);
-        $pdf->Cell(80,6,': '.$nama,0,0);
+        $pdf->Cell(180,6,': '.strtoupper($nama),0,0);
         $pdf->Cell(30,6,'SEMESTER',0,0);
         $pdf->Cell(26,6,': I (SATU)',0,0);
 
-        $pdf->Cell(10,7,'',0,1);
-        $pdf->Cell(40,6,'MATA PELAJARAN',0,0);
-        $pdf->Cell(80,6,': MATEMATIKA',0,0);
-
-        // $pdf->SetFont('Arial','B',10);
-        // $pdf->Cell(20,6,'NIM',1,0);
-        // $pdf->Cell(50,6,'NAMA SISWA',1,0);
-
         $pdf->SetFont('Arial','B',9);
         $pdf->Cell(10,7,'',0,1);
 
+        $pdf->Cell(10,7,'',0,1);
         $pdf->Cell(20,6,'A. DETAIL NILAI PENGETAHUAN',0,0);
+                $xPos = $pdf->GetX();
+                $yPos = $pdf->GetY();
+                $pdf->setXY($xPos + 73, $yPos);
+
+        $pdf->Cell(20,6,'B. DETAIL NILAI KETERAMPILAN',0,0);
+
+                $xPos = $pdf->GetX();
+                $yPos = $pdf->GetY();
+                $pdf->setXY($xPos + 40, $yPos);
+
+        $pdf->Cell(20,6,'C. DETAIL NILAI SIKAP',0,0);
 
         $pdf->Cell(10,7,'',0,1);
+
+
 
         $pdf->SetFont('Arial','B',9);
         $pdf->Cell(10,10,'NO',1,0,'C');
-        $pdf->Cell(45,10,'KOMPETENSI',1,0,'C');
+        $pdf->Cell(25,10,'KOMPETENSI',1,0,'C');
         $pdf->Cell(12,10,'P1',1,0,'C');
         $pdf->Cell(12,10,'P2',1,0,'C');
         $pdf->Cell(12,10,'P3',1,0,'C');
-        $pdf->Cell(20,10,'RATA-RATA',1,0,'C');
+        $pdf->Cell(15,10,'RERATA',1,0,'C');
         // $pdf->Cell(12,10,'PRED',1,0,'C');
         // $pdf->Cell(45,10,'DESKRIPSI',1,0,'C');
+
+        $xPos = $pdf->GetX();
+        $yPos = $pdf->GetY();
+        $pdf->setXY($xPos + 10, $yPos);
+
+        $pdf->SetFont('Arial','B',9);
+        $pdf->Cell(10,10,'NO',1,0,'C');
+        $pdf->Cell(27,10,'KINERJA',1,0,'C');
+        $pdf->Cell(12,10,'NILAI',1,0,'C');
+
+        $xPos = $pdf->GetX();
+        $yPos = $pdf->GetY();
+        $pdf->setXY($xPos + 10, $yPos);
+
+        $pdf->SetFont('Arial','B',9);
+        $pdf->Cell(10,10,'NO',1,0,'C');
+        $pdf->Cell(25,10,'SIKAP',1,0,'C');
+        $pdf->Cell(12,10,'PP',1,0,'C');
+        $pdf->Cell(12,10,'PS',1,0,'C');
+        $pdf->Cell(12,10,'PD',1,0,'C');
+        $pdf->Cell(12,10,'PBJ',1,0,'C');
+        $pdf->Cell(12,10,'PKJ',1,0,'C');
+        $pdf->Cell(12,10,'PPD',1,0,'C');
+        $pdf->Cell(15,10,'RERATA',1,0,'C');
+
+
         $i = 1;
         $a = 0;
 
@@ -428,189 +474,174 @@ function cetak_detail(){
         $line = 0;
         $line_keterampilan = 0;
 
-        $hasil = $this->pengetahuan_model->get_data_pengetahuan_siswa_mapel($kunci,1);
 
-        $data_keterampilan = $this->pengetahuan_model->get_data_keterampilan_siswa($kunci);     
+        $data_pengetahuan = $this->pengetahuan_model->get_data_pengetahuan_siswa_mapel($mapel, $siswa); 
 
+        $data = array();
+        $i=0;
+        foreach ($data_pengetahuan -> result() as $row) {
+                if($i==0){
+                    $data['uas'] = $row->uas;
+                    $data['uts'] = $row->uts;                   
+                }
+                $data['nama'] = $row->nama_siswa;
+                $data['kd1'][] = $row->kd1;
+                $data['kd2'][] = $row->kd2;
+                $data['kd3'][] = $row->kd3;
+                $data['kd4'][] = $row->kd4;
+                $data['kd5'][] = $row->kd5;
+                $data['kd6'][] = $row->kd6;
+                $data['kd7'][] = $row->kd7;
+                $data['kd8'][] = $row->kd8;
+                $data['kd9'][] = $row->kd9;
+                $data['kd10'][] = $row->kd10;
+                $i++;
+        }
+        
 
+        $data_keterampilan = $this->keterampilan_model->get_data_keterampilan_siswa_mapel($mapel, $siswa);  
 
+        $data_keterampilan_siswa = array();
+        foreach ($data_keterampilan -> result() as $row) {
+            $data_keterampilan_siswa['k1'] = $row->k1;
+            $data_keterampilan_siswa['k2'] = $row->k2;
+            $data_keterampilan_siswa['k3'] = $row->k3;
+            $data_keterampilan_siswa['k4'] = $row->k4;
+            $data_keterampilan_siswa['k5'] = $row->k5;
+            $data_keterampilan_siswa['k6'] = $row->k6;
+            $data_keterampilan_siswa['k7'] = $row->k7;
+            $data_keterampilan_siswa['k8'] = $row->k8;
+            $data_keterampilan_siswa['k9'] = $row->k9;
+            $data_keterampilan_siswa['k10'] = $row->k10;
+        }
 
+        $data_sikap = $this->sikap_model->get_data_sikap_siswa_mapel($mapel, $siswa); 
 
-                $i  = 1;
-                $no = 1;
-                $j  = 0;
-                $nil_kd1 = 0;
-                $nil_kd2 = 0;
-                $nil_kd3 = 0;
-                $nil_kd4 = 0;
-                $nil_kd5 = 0;
-                $nil_kd6 = 0;
-                $nil_kd7 = 0;
-                $nil_kd8 = 0;
-                $nil_kd9 = 0;
-                $nil_kd10 = 0;
-                $nilai = 0;
-                $nilai_uas = 0;
-                $nilai_uts = 0;
-                $kd1 = [];
-                $kd2 = [];
-                $kd3 = [];
-                $kd4 = [];
-                $kd5 = [];
-                $kd6 = [];
-                $kd7 = [];
-                $kd8 = [];
-                $kd9 = [];
-                $kd10 = []; 
-                $rerata = [];
-                $nilai_pengetahuan = [];
-                $predikatnya = [];
-                $status = [];
-                $predikat = '';
-                $rata = 0;
-                $label = '';
-                $lulus = 'T';
-                $deskripsi = [];
-                $k = 0;
-
-                foreach ($hasil->result() as $row) {
-                    $nil_kd1 = $nil_kd1 + $row->kd1;
-                    $nil_kd2 = $nil_kd2 + $row->kd2;
-                    $nil_kd3 = $nil_kd3 + $row->kd3;
-                    $nil_kd4 = $nil_kd4 + $row->kd4;
-                    $nil_kd5 = $nil_kd5 + $row->kd5;
-                    $nil_kd6 = $nil_kd6 + $row->kd6;
-                    $nil_kd7 = $nil_kd7 + $row->kd7;
-                    $nil_kd8 = $nil_kd8 + $row->kd8;
-                    $nil_kd9 = $nil_kd9 + $row->kd9;
-                    $nil_kd10 = $nil_kd10 + $row->kd10;
-
-                    if($i==1){
-                        $nilai_uas = $row->uas;
-                        $nilai_uts = $row->uts;
-                        $deskripsi[$k] = $row->deskripsi;
-                        $k++;
-                    } //end if
-                    
-                    if($i==4){
-                        $kd1[$j] = $nil_kd1/3;
-                        $kd2[$j] = $nil_kd2/3;
-                        $kd3[$j] = $nil_kd3/3;
-                        $kd4[$j] = $nil_kd4/3;
-                        $kd5[$j] = $nil_kd5/3;
-                        $kd6[$j] = $nil_kd6/3;
-                        $kd7[$j] = $nil_kd7/3;
-                        $kd8[$j] = $nil_kd8/3;
-                        $kd9[$j] = $nil_kd9/3;
-                        $kd10[$j] = $nil_kd10/3;
-
-                        $rata = ($kd1[$j] + $kd2[$j] + $kd3[$j] + $kd4[$j] + $kd5[$j] + $kd6[$j] + $kd7[$j] + $kd8[$j] + $kd9[$j] +  $kd10[$j])/10;
-                        $nilai = ($rata+ $nilai_uas + $nilai_uts)/3;
-
-                        if($nilai >=93 && $nilai<=100){
-                            $predikat = 'A';
-                            $label = 'label-success';
-                            $lulus ="T";
-                        }
-                        else if($nilai >=85 && $nilai < 92){
-                            $predikat = 'B';
-                            $label = 'label-success';
-                            $lulus ="T";
-                        }
-                        else if($nilai >=75 && $nilai < 84){
-                            $predikat = 'C';
-                            $label = 'label-warning';
-                            $lulus ="T";
-                        }
-                        else {
-                            $predikat = 'D';
-                            $label = 'label-danger';
-                            $lulus ="TT";
-                        }
-
-                        $rerata[$j] = $rata;
-                        $nilai_pengetahuan[$j] = $nilai;
-                        $predikatnya[$j] = $predikat;
-                        $status[$j] = $lulus;
-
-                        $nil_kd1 = 0;
-                        $nil_kd2 = 0;
-                        $nil_kd3 = 0;
-                        $nil_kd4 = 0;
-                        $nil_kd5 = 0;
-                        $nil_kd6 = 0;
-                        $nil_kd7 = 0;
-                        $nil_kd8 = 0;
-                        $nil_kd9 = 0;
-                        $nil_kd10 = 0;
-                        $nilai = 0;
-                        $rata = 0;
-                        $i = 1;
-                        $j++;
-                    } // end if
-                    else{
-                        $i++;
-                    } 
-                } // end foreach
+        $data_sikap_siswa = array();
+        $i=0;
+        foreach ($data_sikap -> result() as $row) {
+                $data_sikap_siswa['s1'][] = $row->sikap1;
+                $data_sikap_siswa['s2'][] = $row->sikap2;
+                $data_sikap_siswa['s3'][] = $row->sikap3;
+                $data_sikap_siswa['s4'][] = $row->sikap4;
+                $data_sikap_siswa['s5'][] = $row->sikap5;
+                $data_sikap_siswa['s6'][] = $row->sikap6;
+                $data_sikap_siswa['s7'][] = $row->sikap7;
+                $data_sikap_siswa['s8'][] = $row->sikap8;
+                $data_sikap_siswa['s9'][] = $row->sikap9;
+                $data_sikap_siswa['s10'][] = $row->sikap10;
+        }
 
 
-
-                $i=1;
-                $no = 1;
-                $nilai = [];
-                $predikat_keterampilan = [];
-                $deskripsi_keterampilan = [];
-                $lulus = '';
-                foreach ($data_keterampilan->result() as $row) {
-                    $nilai[$no-1] = ($row->k1 + $row->k2 + $row->k3 + $row->k4 + $row->k5 + $row->k6 + $row->k7 + $row->k8 + $row->k9 + $row->k10)/30*100;
-                    $deskripsi_keterampilan[$no-1] = $row->deskripsi;
-                    if($nilai[$no-1] >=93 && $nilai[$no-1]<=100){
-                        $predikat_keterampilan[$no-1] = 'A';
-                        $label = 'label-success';
-                        $lulus ="T";
-                    }
-                    else if($nilai[$no-1] >=85 && $nilai[$no-1] < 92){
-                        $predikat_keterampilan[$no-1] = 'B';
-                        $label = 'label-success';
-                        $lulus ="T";
-                    }
-                    else if($nilai[$no-1] >=75 && $nilai[$no-1] < 84){
-                        $predikat_keterampilan[$no-1] = 'C';
-                        $label = 'label-warning';
-                        $lulus ="T";
-                    }
-                    else {
-                        $predikat_keterampilan[$no-1] = 'D';
-                        $label = 'label-danger';
-                        $lulus ="TT";
-                    }
-
-                    $i++; 
-                    $no++;
-                } // end foreach
-
-
-        $i = 1;
 
         $pdf->SetFont('Arial','',8);
         $pdf->Cell(10,4,'',0,1);
 
         $pdf->Cell(10,6,'',0,1);
 
-        foreach ($hasil -> result() as $row) {  
-                
+        $rerata = 0;
+        $total = 0;
+        $total_keterampilan = 0;
+        $total_sikap = 0;
+        $rerata_sikap = 0;
+
+        for($i=1; $i<=10; $i++){
+            $pertemuan1 = $data['kd'.$i][0];
+            $pertemuan2 = $data['kd'.$i][1];
+            $pertemuan3 = $data['kd'.$i][2];
+            $rerata = ($pertemuan1+$pertemuan2+$pertemuan3)/3;
+
+            $nil_keterampilan = $data_keterampilan_siswa['k'.$i]/3*100;
+
+            $sikap1 = $data_sikap_siswa['s'.$i][0]/2*100;
+            $sikap2 = $data_sikap_siswa['s'.$i][1]/3*100;
+            $sikap3 = $data_sikap_siswa['s'.$i][2]/2*100;
+            $sikap4 = $data_sikap_siswa['s'.$i][3]/2*100;
+            $sikap5 = $data_sikap_siswa['s'.$i][4]/4*100;
+            $sikap6 = $data_sikap_siswa['s'.$i][5]/3*100;
+
+            $rerata_sikap = ($sikap1+$sikap2+$sikap3+$sikap4+$sikap5+$sikap6)/6;
+            
             $pdf->Cell(10,6,$i,1,0,'C');
-            $pdf->Cell(45,6,$row->pertemuan,1,0);
-            $pdf->Cell(12,6, number_format($row->kd1,2),1,0,'C');
-            $pdf->Cell(12,6, number_format($row->kd1,2),1,0,'C');
-            $pdf->Cell(12,6, number_format($row->kd1,2),1,0, 'C');
-            $pdf->Cell(20,6, number_format($nilai[$i-1]),1,0,'C');
-        $pdf->Cell(10,6,'',0,1);
-                
-                
+            $pdf->Cell(25,6,'KD '.$i,1,0,'C');
+            $pdf->Cell(12,6, number_format($data['kd'.$i][0]),1,0,'C');
+            $pdf->Cell(12,6, number_format($data['kd'.$i][1]),1,0,'C');
+            $pdf->Cell(12,6, number_format($data['kd'.$i][2]),1,0, 'C');
+            $pdf->Cell(15,6, number_format($rerata),1,0,'C');
+
+                $xPos = $pdf->GetX();
+                $yPos = $pdf->GetY();
+                $pdf->setXY($xPos + 10, $yPos);
+
+            $pdf->Cell(10,6,$i,1,0,'C');
+            $pdf->Cell(27,6,'K'.$i,1,0,'C');
+            $pdf->Cell(12,6, number_format($nil_keterampilan),1,0,'C');
+                $xPos = $pdf->GetX();
+                $yPos = $pdf->GetY();
+                $pdf->setXY($xPos + 10, $yPos);
+            $pdf->Cell(10,6,$i,1,0,'C');
+            $pdf->Cell(25,6,'S'.$i,1,0,'C');
+            $pdf->Cell(12,6, number_format($sikap1),1,0,'C');
+            $pdf->Cell(12,6, number_format($sikap2),1,0,'C');
+            $pdf->Cell(12,6, number_format($sikap3),1,0,'C');
+            $pdf->Cell(12,6, number_format($sikap4),1,0,'C');
+            $pdf->Cell(12,6, number_format($sikap5),1,0,'C');
+            $pdf->Cell(12,6, number_format($sikap6),1,0,'C');
+            $pdf->Cell(15,6, number_format($rerata_sikap),1,0,'C');
+
+            $pdf->Cell(10,6,'',0,1);
+            $total = $total + $rerata; 
+            $total_keterampilan = $total_keterampilan + $nil_keterampilan;
+            $total_sikap = $total_sikap + $rerata_sikap;
+
         }
 
-        $pdf->Output();
+        $nilai_pengetahuan = ($total/10+$data['uts']+$data['uas'])/3;
+        // $nilai_sikap = $total_sikap/10;
+            $pdf->Cell(71,6,"TOTAL",1,0,'C');
+            $pdf->Cell(15,6,number_format($total/10),1,0,'C');
+                $xPos = $pdf->GetX();
+                $yPos = $pdf->GetY();
+                $pdf->setXY($xPos + 10, $yPos);
+            $pdf->SetFont('Arial','B',9);
+            $pdf->Cell(37,6,"NILAI KETERAMPILAN",1,0,'C');
+            $pdf->Cell(12,6,number_format($total_keterampilan/10),1,0,'C');
+
+                $xPos = $pdf->GetX();
+                $yPos = $pdf->GetY();
+                $pdf->setXY($xPos + 10, $yPos);
+            $pdf->SetFont('Arial','B',9);
+            $pdf->Cell(107,6,"NILAI SIKAP",1,0,'C');
+            $pdf->Cell(15,6,number_format($total_sikap/10),1,0,'C');
+            $pdf->Cell(10,6,'',0,1);
+
+            $pdf->SetFont('Arial','',9);
+            $pdf->Cell(71,6,"UTS",1,0,'C');
+            $pdf->Cell(15,6,$data['uts'],1,0,'C');
+
+            $pdf->Cell(10,6,'',0,1);
+            $pdf->Cell(71,6,"UAS",1,0,'C');
+            $pdf->Cell(15,6,$data['uas'],1,0,'C');
+            $pdf->Cell(10,6,'',0,1);
+            $pdf->SetFont('Arial','B',9);
+            $pdf->Cell(71,6,"NILAI PENGETAHUAN",1,0,'C');
+            $pdf->Cell(15,6,number_format($nilai_pengetahuan),1,0,'C');
+            $pdf->Cell(10,6,'',0,1);
+            $pdf->Cell(10,6,'',0,1);
+            $pdf->SetFont('Arial','I',9);
+            $pdf->Cell(71,6,"Keterangan :",0,0,'L');
+            $pdf->Cell(10,6,'',0,1);
+            $pdf->Cell(71,6,"P = Pertemuan, K = Kinerja, S = Sikap",0,0,'L');
+            $pdf->Cell(10,6,'',0,1);
+            $pdf->Cell(71,6,"KD = Kompetensi Dasar, PP = Penilaian Patuh, PS = Penilaian Santun",0,0,'L');
+            $pdf->Cell(10,6,'',0,1);
+            $pdf->Cell(71,6,"PD = Penilaian Disipilin, PBJ = Penilaian Tanggung Jawab",0,0,'L');
+            $pdf->Cell(10,6,'',0,1);
+            $pdf->Cell(71,6,"PKJ = Penilaian Kejujuran, PPD = Penilain Percaya Diri",0,0,'L');
+
+
+        $pdf->Output($nama.'_Detail_Nilai.pdf','D');
+        // $pdf->Output();
     }
 
 

@@ -585,10 +585,10 @@ $no = 1;
                                                 <?php echo number_format($rerata_sikap[$j]) ?>
                                             </td>
                                             <td>
-                                                <a type="button" title="<?php echo $row->id_siswa ?>" data-toggle="modal" data-target="#myModal" title="Lihat Detail" id="<?php echo $row->id_siswa ?>" class="btn btn-xs btn-primary">
+                                                <a type="button" title="Lihat Detail <?php echo $row->nama_siswa ?>" data-toggle="modal" data-target="#myModal" title="Lihat Detail" id="<?php echo $row->id_siswa ?>" class="btn btn-xs btn-primary">
                                                     <i class="ace-icon fa fa-eye bigger-120"></i>
                                                 </a>
-                                                <a href="<?php echo base_url()?>index.php/hasil/cetak/<?php echo $row->id_siswa ?>" title="Cetak" id="<?php echo $row->no_induk ?><?php echo $i ?>kd1" class="btn btn-xs btn-success">
+                                                <a href="<?php echo base_url()?>index.php/hasil/cetak_detail/<?php echo $row->id_guru ?>/<?php echo $row->id_siswa ?>" title="Cetak Detail <?php echo $row->nama_siswa ?>" id="<?php echo $row->no_induk ?><?php echo $i ?>kd1" class="btn btn-xs btn-success">
                                                     <i class="ace-icon fa fa-print bigger-120"></i>
                                                 </a>
                                             </td>
@@ -627,7 +627,7 @@ $no = 1;
         <h4 class="modal-title" style="text-align: center;">Detail Nilai <b><span id="detail_nama"></span></b></h4>
       </div>
       <div class="modal-body">
-        <p>Mata Pelajaran : Matematika</b></p>
+        <p style="text-align: center;"><b>Mata Pelajaran : <?php echo $row->mata_pelajaran ?></b></p>
 
         <ul class="nav nav-tabs" id="myTab" >
             <li class="active" style="background-color: red;">

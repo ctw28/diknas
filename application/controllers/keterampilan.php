@@ -61,7 +61,6 @@ class Keterampilan extends CI_Controller {
 		$siswa =  $this->uri->segment(4);
 		$this->load->model('keterampilan_model');
 
-		// echo json_encode(array('status' => 'aaa'));
 		$data_keterampilan = $this->keterampilan_model->get_data_keterampilan_siswa_mapel($mapel, $siswa);	
 
 		$data_sikap = array();
@@ -77,7 +76,7 @@ class Keterampilan extends CI_Controller {
 				$data_sikap['k9'] = $row->k9;
 				$data_sikap['k10'] = $row->k10;
 		}
-			// echo $data[0]->kd1;
+		// echo $data[0]->kd1;
 		// while ($row = mysqli_fetch_assoc($data_pengetahuan)) {
 		// 	$data[] = $row;
 		// }
