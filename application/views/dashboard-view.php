@@ -158,7 +158,7 @@
                         <div class="row">
                                 <!-- PAGE CONTENT BEGINS -->
 
-                                <div class="col-xs-12 col-sm-12 widget-container-col" id="widget-container-col-2" style="text-align: left !important;">
+                                <div class="col-xs-12 col-sm-12 widget-container-col" id="widget-container-col-2">
                                     <div class="widget-box widget-color-green2" id="widget-box-2" data-color="#2E8965">
                                         <div class="widget-header">
                                             <h5 class="widget-title bigger lighter">
@@ -167,42 +167,31 @@
                                             </h5>
                                         </div>
 
-                                        <div class="widget-body">
-                                            <div class="widget-main no-padding">
+                                        <div class="widget-body" style="text-align: center;">
+                                            <!-- <div class="widget-main" > -->
                                     
-                                                <div class="infobox col-md-6" style="background-color: #2E8965; color: white;">
+                                                <div class="col-md-4" style="color:  #2E8965; margin-top: 25px;">
                                                     <div class="infobox-progress">
-                                                            <h2 style="margin:0 !important;"><i class="fa fa-child"></i></h2>
+                                                        <h3 style="margin:0 !important;"><i class="fa fa-child"></i> 34 <br> TOTAL SISWA</h3>
                                                     </div>
-                                                    <div class="infobox-data">
-                                                        <div class="infobox-content" style="color: white;">Total</div>
-                                                        <div class="infobox-content" style="color: white;">SISWA</div>
-                                                    </div>
+                                                    <div class="infobox-data"></div>
                                                 </div>
-                                                <div class="infobox col-md-4" style="background-color: #2E8965; color: white;">
+                                                <div class="col-md-4" style="color:  #2E8965; margin-top: 25px;">
                                                     <div class="infobox-progress">
-                                                            <h2 style="margin:0 !important;">9</h2>
-                                                    </div>
-                                                    <div class="infobox-data">
-                                                        <div class="infobox-content" style="color: white;">Total</div>
-                                                        <div class="infobox-content" style="color: white;">MATA PELAJARAN WAJIB</div>
+                                                        <h3 style="margin:0 !important;"><i class="fa fa-book"></i> 9 <br> TOTAL MATA PELAJARAN WAJIB</h3>
                                                     </div>
                                                 </div>
 
-                                                <div class="infobox col-md-4" style="background-color: #2E8965; color: white;">
+                                                <div class="col-md-4" style="color:  #2E8965; margin-top: 25px;">
                                                     <div class="infobox-progress">
-                                                            <h2 style="margin:0 !important;">5</h2>
-                                                    </div>
-                                                    <div class="infobox-data">
-                                                        <div class="infobox-content" style="color: white;">Total</div>
-                                                        <div class="infobox-content" style="color: white;">MATA PELAJARAN PILIHAN</div>
+                                                        <h3 style="margin:0 !important;"><i class="fa fa-tasks"></i> 5 <br> TOTAL MATA PELAJARAN PILIHAN</h3>
                                                     </div>
                                                 </div>
 
 
                                    
                                     
-                                            </div>
+                                            <!-- </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -214,7 +203,7 @@
                                         
 
 
-                                        <div class="col-xs-12 col-sm-6 widget-container-col" id="widget-container-col-2" style="text-align: left !important;">
+                                        <div class="col-xs-12 col-sm-6 widget-container-col" id="widget-container-col-2" style="text-align: left !important; margin-top: 25px;">
                                             <div class="widget-box widget-color-green2" id="widget-box-2" data-color="#2E8965">
                                                 <div class="widget-header">
                                                     <h5 class="widget-title bigger lighter">
@@ -264,7 +253,7 @@
                                             </div>
                                         </div><!-- /.span -->
 
-                                        <div class="col-xs-12 col-sm-6 widget-container-col" id="widget-container-col-2">
+                                        <div class="col-xs-12 col-sm-6 widget-container-col" id="widget-container-col-2" style="margin-top: 25px;">
                                             <div class="widget-box widget-color-green2" id="widget-box-2">
                                                 <div class="widget-header">
                                                     <h5 class="widget-title bigger lighter">

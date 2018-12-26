@@ -6,9 +6,9 @@ class Sikap extends CI_Controller {
 	public function tampil()
 	{
 		$this->load->model('sikap_model');
-		if($this->session->userdata('logged_in'))
+		if($this->session->userdata('logged_in_hasil'))
    		{
-		 	$session_data = $this->session->userdata('logged_in');
+		 	$session_data = $this->session->userdata('logged_in_hasil');
 			$isi['nama'] = $session_data['nama_guru']; 
 			$isi['id_guru'] = $session_data['id_guru'];
 			$isi['mata_pelajaran'] = $session_data['mata_pelajaran'];

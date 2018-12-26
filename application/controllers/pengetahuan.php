@@ -7,9 +7,9 @@ class Pengetahuan extends CI_Controller {
 	{
 		$this->load->model('pengetahuan_model');
 
-		if($this->session->userdata('logged_in'))
+		if($this->session->userdata('logged_in_hasil'))
    		{
-		 	$session_data = $this->session->userdata('logged_in');
+		 	$session_data = $this->session->userdata('logged_in_hasil');
 			$isi['nama'] = $session_data['nama_wali_kelas']; 
 			$isi['kelas'] = $session_data['kelas'];
 		}

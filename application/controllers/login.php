@@ -15,7 +15,6 @@ class Login extends CI_Controller {
 
 	public function getlogin()
 	{
-		// echo "aaaaaaaaaaaaa";
 
 		
 		$this->load->model('login_model');

@@ -8,9 +8,9 @@ class Pengaturan extends CI_Controller {
 		$this->load->model('pengaturan_model');
 
 
-		if($this->session->userdata('logged_in'))
+		if($this->session->userdata('logged_in_hasil'))
    		{
-		 	$session_data = $this->session->userdata('logged_in');
+		 	$session_data = $this->session->userdata('logged_in_hasil');
 			$isi['nama'] = $session_data['nama_wali_kelas']; 
 			$isi['kelas'] = $session_data['kelas'];
 		}
@@ -28,9 +28,9 @@ class Pengaturan extends CI_Controller {
 		$this->load->model('pengaturan_model');
 
 
-		if($this->session->userdata('logged_in'))
+		if($this->session->userdata('logged_in_hasil'))
    		{
-		 	$session_data = $this->session->userdata('logged_in');
+		 	$session_data = $this->session->userdata('logged_in_hasil');
 			$isi['nama'] = $session_data['nama_wali_kelas']; 
 			$isi['kelas'] = $session_data['kelas'];
 		}
@@ -46,9 +46,9 @@ class Pengaturan extends CI_Controller {
 	public function tambah_siswa()
 	{
 		$this->load->model('pengaturan_model');
-		if($this->session->userdata('logged_in'))
+		if($this->session->userdata('logged_in_hasil'))
    		{
-		 	$session_data = $this->session->userdata('logged_in');
+		 	$session_data = $this->session->userdata('logged_in_hasil');
 			$isi['nama'] = $session_data['nama_wali_kelas']; 
 			$isi['kelas'] = $session_data['kelas'];
 		}
@@ -64,9 +64,9 @@ class Pengaturan extends CI_Controller {
 	public function edit_mata_pelajaran()
 	{
 		$this->load->model('pengaturan_model');
-		if($this->session->userdata('logged_in'))
+		if($this->session->userdata('logged_in_hasil'))
    		{
-		 	$session_data = $this->session->userdata('logged_in');
+		 	$session_data = $this->session->userdata('logged_in_hasil');
 			$isi['nama'] = $session_data['nama_wali_kelas']; 
 			$isi['kelas'] = $session_data['kelas'];
 		}
@@ -136,9 +136,9 @@ class Pengaturan extends CI_Controller {
 	public function edit_siswa()
 	{
 		$this->load->model('pengaturan_model');
-		if($this->session->userdata('logged_in'))
+		if($this->session->userdata('logged_in_hasil'))
    		{
-		 	$session_data = $this->session->userdata('logged_in');
+		 	$session_data = $this->session->userdata('logged_in_hasil');
 			$isi['nama'] = $session_data['nama_wali_kelas']; 
 			$isi['kelas'] = $session_data['kelas'];
 		}
