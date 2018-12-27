@@ -1,3 +1,16 @@
+table thead, .tabel-nilai th, .tabel-nilai td{
+  border: 1px solid #2E8965 !important;
+}
+
+.text-left{
+  text-align: left !important;
+}
+.text-center{
+  text-align: center !important;
+}
+.m-t-25{
+  margin-top: 25px;
+}
 input { 
 	width: 50px 
 }
@@ -34,7 +47,8 @@ h2{
   font-weight: bold;
 }
 .pageNumber {
-  padding: 15px;
+  margin-top: 150px !important;
+  padding: 5px;
 }
 .mata_pelajaran{
 	text-transform: uppercase;

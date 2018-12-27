@@ -105,7 +105,7 @@
                         <b class="arrow"></b>
                     </li>                   
 
-                    <li>
+                    <li class="active open">
                         <a href="" class="dropdown-toggle">
                             <i class="menu-icon fa fa-list"></i>
                             <span class="menu-text"> Pengaturan </span>
@@ -115,7 +115,7 @@
                         <b class="arrow"></b>
 
                         <ul class="submenu">
-                            <li class="">
+                            <li class="active">
                                 <a href="<?php echo base_url()?>index.php/pengaturan/mata_pelajaran">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Mata Pelajaran
@@ -158,108 +158,93 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
+                            <h2 style="text-transform: uppercase;">Daftar Mata Pelajaran wajib</h2>
 
-                                        
+                            <table>
+                                <thead>
+                                    <tr> 
+                                        <th>NO</th>
+                                        <th>NAMA MATA PELAJARAN</th>
+                                        <th>NAMA GURU</th>
+                                        <th>KKM</th>
+                                        <th>KATEGORI</th>
+                                        <th>USERNAME</th>
+                                        <th>PASSWORD</th>
+                                        <th>AKSI</th>
+                                    </tr>
+                                </thead>
+                                    <tbody>
+                                        <?php
+                                        $i = 1;
+                                        foreach ($data_mata_pelajaran->result() as $row) {
+                                            if($row->status_mapel == "wajib"){
+                                        ?>
+                                        <tr> 
+                                            <td><?php echo $i; ?></td>
+                                            <td><?php echo $row->mata_pelajaran ?></td>
+                                            <td><?php echo $row->nama_guru ?></td>
+                                            <td><?php echo $row->kkm ?></td>
+                                            <td><?php echo $row->status_mapel ?></td>
+                                            <td><?php echo $row->username ?></td>
+                                            <td><?php echo $row->password ?></td>
+                                            <td>
+                                            	<a href="<?php echo base_url()?>index.php/pengaturan/edit_mata_pelajaran/<?php echo $row->id_guru ?>" class="btn btn-xs btn-info">
+                            						<i class="ace-icon fa fa-pencil bigger-120"></i>
+                            					</a>
+                            				</td>
 
+                                        </tr>
+                                        <?php
+                                            $i++;
+                                		    }
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                           
+                                <h2 style="text-transform: uppercase;">Daftar Mata Pelajaran Pilihan</h2>
 
+                                <table>
+                                    <thead>
+                                        <tr> 
+                                            <th>NO</th>
+                                            <th>NAMA MATA PELAJARAN</th>
+                                            <th>NAMA GURU</th>
+                                            <th>KKM</th>
+                                            <th>KATEGORI</th>
+                                            <th>USERNAME</th>
+                                            <th>PASSWORD</th>
+                                            <th>AKSI</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $i = 1;
+                                        foreach ($data_mata_pelajaran->result() as $row) {
+                                           if($row->status_mapel == "pilihan"){
+                                        ?>
+                                        <tr> 
+                                            <td><?php echo $i; ?></td>
+                                            <td><?php echo $row->mata_pelajaran ?></td>
+                                            <td><?php echo $row->nama_guru ?></td>
+                                            <td><?php echo $row->kkm ?></td>
+                                            <td><?php echo $row->status_mapel ?></td>
+                                            <td><?php echo $row->username ?></td>
+                                            <td><?php echo $row->password ?></td>
+                                            <td>
+                                            	<a href="<?php echo base_url()?>index.php/pengaturan/edit_mata_pelajaran/<?php echo $row->id_guru ?>" class="btn btn-xs btn-info">
+                            						<i class="ace-icon fa fa-pencil bigger-120"></i>
+                            					</a>
+                            				</td>
 
-
-
-      <h2 style="text-transform: uppercase;">Daftar Mata Pelajaran wajib</h2>
-
-        <table border="0" cellpadding="5" id="simple-table" align="center" class="table  table-bordered table-hover">
-            <thead>
-                <tr> 
-                    <th>NO</th>
-                    <th>NAMA MATA PELAJARAN</th>
-                    <th>NAMA GURU</th>
-                    <th>KKM</th>
-                    <th>KATEGORI</th>
-                    <th>USERNAME</th>
-                    <th>PASSWORD</th>
-                    <th>AKSI</th>
-                </tr>
-            </thead>
-                <tbody>
-                    <?php
-                        $i = 1;
-                        foreach ($data_mata_pelajaran->result() as $row) {
-                                       if($row->status_mapel == "wajib"){
-                    ?>
-                    <tr> 
-                        <td><?php echo $i; ?></td>
-	                    <td><?php echo $row->mata_pelajaran ?></td>
-	                    <td><?php echo $row->nama_guru ?></td>
-	                    <td><?php echo $row->kkm ?></td>
-	                    <td><?php echo $row->status_mapel ?></td>
-	                    <td><?php echo $row->username ?></td>
-	                    <td><?php echo $row->password ?></td>
-	                    <td>
-	                    	<a href="<?php echo base_url()?>index.php/pengaturan/edit_mata_pelajaran/<?php echo $row->id_guru ?>" class="btn btn-xs btn-info">
-								<i class="ace-icon fa fa-pencil bigger-120"></i>
-							</a>
-						</td>
-
-                    </tr>
-                    <?php
-                         $i++;
-                		}
-                        }
-                    ?>
-                </table>
-
-
-           
-<h2 style="text-transform: uppercase;">Daftar Mata Pelajaran Pilihan</h2>
-
-        <table border="0" cellpadding="5" id="simple-table" align="center" class="table  table-bordered table-hover">
-            <thead>
-                <tr> 
-                    <th>NO</th>
-                    <th>NAMA MATA PELAJARAN</th>
-                    <th>NAMA GURU</th>
-                    <th>KKM</th>
-                    <th>KATEGORI</th>
-                    <th>USERNAME</th>
-                    <th>PASSWORD</th>
-                    <th>AKSI</th>
-                </tr>
-            </thead>
-                <tbody>
-                    <?php
-                        $i = 1;
-                        foreach ($data_mata_pelajaran->result() as $row) {
-                                       if($row->status_mapel == "pilihan"){
-                    ?>
-                    <tr> 
-                        <td><?php echo $i; ?></td>
-	                    <td><?php echo $row->mata_pelajaran ?></td>
-	                    <td><?php echo $row->nama_guru ?></td>
-	                    <td><?php echo $row->kkm ?></td>
-	                    <td><?php echo $row->status_mapel ?></td>
-	                    <td><?php echo $row->username ?></td>
-	                    <td><?php echo $row->password ?></td>
-	                    <td>
-	                    	<a href="<?php echo base_url()?>index.php/pengaturan/edit_mata_pelajaran/<?php echo $row->id_guru ?>" class="btn btn-xs btn-info">
-								<i class="ace-icon fa fa-pencil bigger-120"></i>
-							</a>
-						</td>
-
-                    </tr>
-                    <?php
-                         $i++;
-                		}
-                        }
-                    ?>
-                </table>
-
-
-
-
-
-
-
-
+                                        </tr>
+                                        <?php
+                                            $i++;
+                                		    }
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
                                 <!-- PAGE CONTENT ENDS -->
                             </div><!-- /.col -->
                         </div><!-- /.row -->

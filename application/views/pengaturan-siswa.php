@@ -105,7 +105,7 @@
                         <b class="arrow"></b>
                     </li>                   
 
-                    <li>
+                    <li class="active open">
                         <a href="" class="dropdown-toggle">
                             <i class="menu-icon fa fa-list"></i>
                             <span class="menu-text"> Pengaturan </span>
@@ -124,7 +124,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="">
+                            <li class="active">
                                 <a href="<?php echo base_url()?>index.php/pengaturan/siswa">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Siswa
@@ -158,51 +158,52 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
+                                <a style="color:white;" href="<?php echo base_url()?>index.php/pengaturan/tambah_siswa" id="demo-delete-row" class="btn btn-primary">
+                                    <i class="fa fa-plus m-r-5"></i>
+                                Tambah Siswa
+                                </a>
+                                <div class="widget-box widget-color-green2" id="widget-box-2" data-color="#2E8965">
+                                    <div class="widget-header text-center">
+                                        <h3 class="widget-title bigger lighter">
+                                            Daftar Siswa
+                                        </h3>                                            
+                                    </div>
+                                    <div class="widget-body">
+                                        <div class="widget-main no-padding">
+                                            <table>
+                                                <thead>
+                                                    <tr> 
+                                                        <th>NO</th>
+                                                        <th>NO. INDUK</th>
+                                                        <th>NAMA SISWA</th>
+                                                        <th>AKSI</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                        $i = 1;
+                                                        foreach ($data_siswa->result() as $row) {
+                                                    ?>
+                                                    <tr> 
+                                                        <td><?php echo $i; ?></td>
+                                	                    <td><?php echo $row->no_induk ?></td>
+                                	                    <td><?php echo $row->nama_siswa ?></td>
+                                	                    <td>
+                                	                    	<a href="<?php echo base_url()?>index.php/pengaturan/edit_siswa/<?php echo $row->id_siswa ?>" class="btn btn-xs btn-info">
+                                								<i class="ace-icon fa fa-pencil bigger-120"></i>
+                                							</a>
+                                						</td>
 
-                                        
-
-
-           
-<h2 style="text-transform: uppercase;">Daftar SISWA</h2>
-                <a style="color:white;" href="<?php echo base_url()?>index.php/pengaturan/tambah_siswa" id="demo-delete-row" class="btn btn-primary"><i class="fa fa-plus m-r-5"></i>Tambah Siswa</a>
-
-        <table border="0" cellpadding="5" id="simple-table" align="center" class="table  table-bordered table-hover">
-            <thead>
-                <tr> 
-                    <th>NO</th>
-                    <th>NO. INDUK</th>
-                    <th>NAMA SISWA</th>
-                    <th>AKSI</th>
-                </tr>
-            </thead>
-                <tbody>
-                    <?php
-                        $i = 1;
-                        foreach ($data_siswa->result() as $row) {
-                    ?>
-                    <tr> 
-                        <td><?php echo $i; ?></td>
-	                    <td><?php echo $row->no_induk ?></td>
-	                    <td><?php echo $row->nama_siswa ?></td>
-	                    <td>
-	                    	<a href="<?php echo base_url()?>index.php/pengaturan/edit_siswa/<?php echo $row->id_siswa ?>" class="btn btn-xs btn-info">
-								<i class="ace-icon fa fa-pencil bigger-120"></i>
-							</a>
-						</td>
-
-                    </tr>
-                    <?php
-                         $i++;
-                        }
-                    ?>
-                </table>
-
-
-
-
-
-
-
+                                                    </tr>
+                                                    <?php
+                                                         $i++;
+                                                        }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div> <!-- end widget-main -->
+                                    </div> <!-- end widget-body -->
+                                </div> <!-- end widget-box -->
 
                                 <!-- PAGE CONTENT ENDS -->
                             </div><!-- /.col -->

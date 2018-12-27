@@ -129,7 +129,6 @@
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Siswa
                                 </a>
-
                                 <b class="arrow"></b>
                             </li>
                             
@@ -149,7 +148,7 @@
                             <li><i class="ace-icon fa fa-home home-icon"></i>
                                 <a href="<?php echo base_url()?>">Home</a>
                             </li>
-                            <li><a href="<?php echo base_url()?>index.php/sikap">Penilaian</a></li>
+                            <li><a href="<?php echo base_url()?>index.php/sikap">Hasil Penilaian</a></li>
                             
                         </ul><!-- /.breadcrumb -->
                     </div>
@@ -158,140 +157,175 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
+                                <div class="col-xs-12 col-sm-12 widget-container-col" id="widget-container-col-2">
+                                    <div class="widget-box widget-color-green2 text-center" id="widget-box-2" data-color="#2E8965" >
+                                        <div class="widget-header">
+                                            <h5 class="widget-title bigger lighter">
+                                                Daftar Nilai <?php 
+                                                $aaa = 1;
+                                                foreach ($data_pengetahuan->result() as $row) {
+                                                    if ($aaa==1) {
+                                                    echo "Mata Pelajaran : $row->mata_pelajaran</h5>";
+                                                    echo "<h5>Nama Guru : $row->nama_guru</h5>";
+                                                    }
+                                                    $aaa++;
+                                                }
+                                                ?>
+                                        </div>
+                                    </div>
+                                </div><!-- /.widget-container-col -->
 
-                                        <div class="col-xs-12 col-sm-12 widget-container-col" id="widget-container-col-2" style="text-align: center !important;">
-                                            <div class="widget-box widget-color-green2" id="widget-box-2" data-color="#2E8965">
-                                                <div class="widget-header">
-                                                    <h5 class="widget-title bigger lighter">
-                                                        Daftar Nilai <?php 
-$aaa = 1;
-foreach ($data_pengetahuan->result() as $row) {
-    if ($aaa==1) {
-    echo "Mata Pelajaran : $row->mata_pelajaran</h5>";
-    echo "<h5>Nama Guru : $row->nama_guru</h5>";
-    }
-    $aaa++;
-}
-?>
-                                                    
+                                <div class="col-sm-12">
+                                    <table class="tabel-nilai">
+                                        <thead>
+                                            <tr> 
+                                                <th rowspan="2">NO</th>
+                                                <th rowspan="2">NO INDUK</th>
+                                                <th rowspan="2">NAMA</th>
+                                                <th colspan="3">NILAI</th>
+                                                <th rowspan="2">AKSI</th>
+                                            </tr>
+                                            <tr style="background-color: white !important">
+                                                <th>PENGETAHUAN</th>
+                                                <th>KETERAMPILAN</th>
+                                                <th>SIKAP</th>                    
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                            $i  = 1;
+                                            $no = 1;
+                                            $j  = 0;
+                                            $nil_kd1 = 0;
+                                            $nil_kd2 = 0;
+                                            $nil_kd3 = 0;
+                                            $nil_kd4 = 0;
+                                            $nil_kd5 = 0;
+                                            $nil_kd6 = 0;
+                                            $nil_kd7 = 0;
+                                            $nil_kd8 = 0;
+                                            $nil_kd9 = 0;
+                                            $nil_kd10 = 0;
+                                            $nilai = 0;
+                                            $nilai_uas = 0;
+                                            $nilai_uts = 0;
+                                            $kd1 = [];
+                                            $kd2 = [];
+                                            $kd3 = [];
+                                            $kd4 = [];
+                                            $kd5 = [];
+                                            $kd6 = [];
+                                            $kd7 = [];
+                                            $kd8 = [];
+                                            $kd9 = [];
+                                            $kd10 = []; 
+                                            $rerata = [];
+                                            $nilai_pengetahuan = [];
+                                            $predikatnya = [];
+                                            $status = [];
+                                            $predikat = '';
+                                            $rata = 0;
+                                            $label = '';
+                                            $lulus = 'T';
 
-                                                    
-                                                </div>
+                                            foreach ($data_pengetahuan->result() as $row) {
+                                                $nil_kd1 = $nil_kd1 + $row->kd1;
+                                                $nil_kd2 = $nil_kd2 + $row->kd2;
+                                                $nil_kd3 = $nil_kd3 + $row->kd3;
+                                                $nil_kd4 = $nil_kd4 + $row->kd4;
+                                                $nil_kd5 = $nil_kd5 + $row->kd5;
+                                                $nil_kd6 = $nil_kd6 + $row->kd6;
+                                                $nil_kd7 = $nil_kd7 + $row->kd7;
+                                                $nil_kd8 = $nil_kd8 + $row->kd8;
+                                                $nil_kd9 = $nil_kd9 + $row->kd9;
+                                                $nil_kd10 = $nil_kd10 + $row->kd10;
 
-                                                <div class="widget-body">
-                                                    <div class="widget-main no-padding">
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!-- /.span -->
+                                                if($i==1){
+                                                    $nilai_uas = $row->uas;
+                                                    $nilai_uts = $row->uts;
+                                                } //end if
+                                                
+                                                if($i==4){
+                                                    $kd1[$j] = $nil_kd1/3;
+                                                    $kd2[$j] = $nil_kd2/3;
+                                                    $kd3[$j] = $nil_kd3/3;
+                                                    $kd4[$j] = $nil_kd4/3;
+                                                    $kd5[$j] = $nil_kd5/3;
+                                                    $kd6[$j] = $nil_kd6/3;
+                                                    $kd7[$j] = $nil_kd7/3;
+                                                    $kd8[$j] = $nil_kd8/3;
+                                                    $kd9[$j] = $nil_kd9/3;
+                                                    $kd10[$j] = $nil_kd10/3;
 
+                                                    $rata = ($kd1[$j] + $kd2[$j] + $kd3[$j] + $kd4[$j] + $kd5[$j] + $kd6[$j] + $kd7[$j] + $kd8[$j] + $kd9[$j] +  $kd10[$j])/10;
+                                                    $nilai = ($rata+ $nilai_uas + $nilai_uts)/3;
 
+                                                    if($nilai >=93 && $nilai<=100){
+                                                        $predikat = 'A';
+                                                        $label = 'label-success';
+                                                        $lulus ="T";
+                                                    }
+                                                    else if($nilai >=85 && $nilai < 92){
+                                                        $predikat = 'B';
+                                                        $label = 'label-success';
+                                                        $lulus ="T";
+                                                    }
+                                                    else if($nilai >=75 && $nilai < 84){
+                                                        $predikat = 'C';
+                                                        $label = 'label-warning';
+                                                        $lulus ="T";
+                                                    }
+                                                    else {
+                                                        $predikat = 'D';
+                                                        $label = 'label-danger';
+                                                        $lulus ="TT";
+                                                    }
 
+                                                    $rerata[$j] = $rata;
+                                                    $nilai_pengetahuan[$j] = $nilai;
+                                                    $predikatnya[$j] = $predikat;
+                                                    $status[$j] = $lulus;
 
+                                                    $nil_kd1 = 0;
+                                                    $nil_kd2 = 0;
+                                                    $nil_kd3 = 0;
+                                                    $nil_kd4 = 0;
+                                                    $nil_kd5 = 0;
+                                                    $nil_kd6 = 0;
+                                                    $nil_kd7 = 0;
+                                                    $nil_kd8 = 0;
+                                                    $nil_kd9 = 0;
+                                                    $nil_kd10 = 0;
+                                                    $nilai = 0;
+                                                    $rata = 0;
+                                                    $i = 1;
+                                                    $j++;
+                                                } // end if
+                                                else{
+                                                    $i++;
+                                                } 
+                                            } // end foreach
 
-                            <div class="col-sm-12">
-                                <!-- <a href="<?php echo base_url()?>index.php/pengetahuan/tampil/<?php echo $kunci ?>">Lihat Proses Pengetahuan</a> -->
+                                            $i = 1;
+                                            $j = 0;
+                                            $no = 1;
+                                            $nilai_keterampilan = [];
+                                            $predikat = '';
+                                            $lulus = '';
 
-        <table border="0" cellpadding="5" id="simple-table" align="center" class="table  table-bordered table-hover">
-            <thead>
-                <tr> 
-                    <th rowspan="2">NO</th>
-                    <th rowspan="2">NAMA</th>
-                    <th colspan="3">NILAI</th>
-                    <th rowspan="2">AKSI</th>
-                </tr>
-                <tr>
-                    <th>PENGETAHUAN</th>
-                    <th>KETERAMPILAN</th>
-                    <th>SIKAP</th>                    
-                </tr>
-
-            </thead>
-                <tbody>
-                    <?php
-                                        $i  = 1;
-                                        $no = 1;
-                                        $j  = 0;
-                                        $nil_kd1 = 0;
-                                        $nil_kd2 = 0;
-                                        $nil_kd3 = 0;
-                                        $nil_kd4 = 0;
-                                        $nil_kd5 = 0;
-                                        $nil_kd6 = 0;
-                                        $nil_kd7 = 0;
-                                        $nil_kd8 = 0;
-                                        $nil_kd9 = 0;
-                                        $nil_kd10 = 0;
-                                        $nilai = 0;
-                                        $nilai_uas = 0;
-                                        $nilai_uts = 0;
-                                        $kd1 = [];
-                                        $kd2 = [];
-                                        $kd3 = [];
-                                        $kd4 = [];
-                                        $kd5 = [];
-                                        $kd6 = [];
-                                        $kd7 = [];
-                                        $kd8 = [];
-                                        $kd9 = [];
-                                        $kd10 = []; 
-                                        $rerata = [];
-                                        $nilai_pengetahuan = [];
-                                        $predikatnya = [];
-                                        $status = [];
-                                        $predikat = '';
-                                        $rata = 0;
-                                        $label = '';
-                                        $lulus = 'T';
-
-                                        foreach ($data_pengetahuan->result() as $row) {
-                                            $nil_kd1 = $nil_kd1 + $row->kd1;
-                                            $nil_kd2 = $nil_kd2 + $row->kd2;
-                                            $nil_kd3 = $nil_kd3 + $row->kd3;
-                                            $nil_kd4 = $nil_kd4 + $row->kd4;
-                                            $nil_kd5 = $nil_kd5 + $row->kd5;
-                                            $nil_kd6 = $nil_kd6 + $row->kd6;
-                                            $nil_kd7 = $nil_kd7 + $row->kd7;
-                                            $nil_kd8 = $nil_kd8 + $row->kd8;
-                                            $nil_kd9 = $nil_kd9 + $row->kd9;
-                                            $nil_kd10 = $nil_kd10 + $row->kd10;
-
-                                            if($i==1){
-                                                $nilai_uas = $row->uas;
-                                                $nilai_uts = $row->uts;
-                                            } //end if
-                                            
-                                            if($i==4){
-                                                $kd1[$j] = $nil_kd1/3;
-                                                $kd2[$j] = $nil_kd2/3;
-                                                $kd3[$j] = $nil_kd3/3;
-                                                $kd4[$j] = $nil_kd4/3;
-                                                $kd5[$j] = $nil_kd5/3;
-                                                $kd6[$j] = $nil_kd6/3;
-                                                $kd7[$j] = $nil_kd7/3;
-                                                $kd8[$j] = $nil_kd8/3;
-                                                $kd9[$j] = $nil_kd9/3;
-                                                $kd10[$j] = $nil_kd10/3;
-
-                                                // if($kd1[$j] < 75)
-                                                //     $kd1[$j] = $row->pertemuan;
-
-
-                                                $rata = ($kd1[$j] + $kd2[$j] + $kd3[$j] + $kd4[$j] + $kd5[$j] + $kd6[$j] + $kd7[$j] + $kd8[$j] + $kd9[$j] +  $kd10[$j])/10;
-                                                $nilai = ($rata+ $nilai_uas + $nilai_uts)/3;
-
-                                                if($nilai >=93 && $nilai<=100){
+                                            foreach ($data_keterampilan->result() as $row) {
+                                                $nilai_keterampilan[$j] = ($row->k1 + $row->k2 + $row->k3 + $row->k4 + $row->k5 + $row->k6 + $row->k7 + $row->k8 + $row->k9 + $row->k10)/30*100;
+                                                if($nilai_keterampilan[$j] >=93 && $nilai_keterampilan[$j]<=100){
                                                     $predikat = 'A';
                                                     $label = 'label-success';
                                                     $lulus ="T";
                                                 }
-                                                else if($nilai >=85 && $nilai < 92){
+                                                else if($nilai_keterampilan[$j] >=85 && $nilai_keterampilan[$j] < 92){
                                                     $predikat = 'B';
                                                     $label = 'label-success';
                                                     $lulus ="T";
                                                 }
-                                                else if($nilai >=75 && $nilai < 84){
+                                                else if($nilai_keterampilan[$j] >=75 && $nilai_keterampilan[$j] < 84){
                                                     $predikat = 'C';
                                                     $label = 'label-warning';
                                                     $lulus ="T";
@@ -300,260 +334,119 @@ foreach ($data_pengetahuan->result() as $row) {
                                                     $predikat = 'D';
                                                     $label = 'label-danger';
                                                     $lulus ="TT";
+                                                }                                                     
+                                                $j++;
+                                                $i++; 
+                                                $no++;
+                                            }
+
+                                            $i = 1;
+                                            $no = 1;
+                                            $gg = 0;
+                                            $nil_kd1_sikap = 0;
+                                            $nil_kd2_sikap = 0;
+                                            $nil_kd3_sikap = 0;
+                                            $nil_kd4_sikap = 0;
+                                            $nil_kd5_sikap = 0;
+                                            $nil_kd6_sikap = 0;
+                                            $nil_kd7_sikap = 0;
+                                            $nil_kd8_sikap = 0;
+                                            $nil_kd9_sikap = 0;
+                                            $nil_kd10_sikap = 0;
+                                            $nilai_sikap = 0;
+                                            $kd1_sikap = [];
+                                            $kd2_sikap = [];
+                                            $kd3_sikap = [];
+                                            $kd4_sikap = [];
+                                            $kd5_sikap = [];
+                                            $kd6_sikap = [];
+                                            $kd7_sikap = [];
+                                            $kd8_sikap = [];
+                                            $kd9_sikap = [];
+                                            $kd10_sikap = []; 
+                                            $rerata_sikap = [];
+                                            $predikatnya_sikap = [];
+                                            $rata_sikap = 0;
+                                            $label_sikap = '';
+
+                                        foreach ($data_sikap->result() as $row) {
+                                            $nil_kd1_sikap = $nil_kd1_sikap + $row->sikap1;
+                                            $nil_kd2_sikap = $nil_kd2_sikap + $row->sikap2;
+                                            $nil_kd3_sikap = $nil_kd3_sikap + $row->sikap3;
+                                            $nil_kd4_sikap = $nil_kd4_sikap + $row->sikap4;
+                                            $nil_kd5_sikap = $nil_kd5_sikap + $row->sikap5;
+                                            $nil_kd6_sikap = $nil_kd6_sikap + $row->sikap6;
+                                            $nil_kd7_sikap = $nil_kd7_sikap + $row->sikap7;
+                                            $nil_kd8_sikap = $nil_kd8_sikap + $row->sikap8;
+                                            $nil_kd9_sikap = $nil_kd9_sikap + $row->sikap9;
+                                            $nil_kd10_sikap = $nil_kd10_sikap + $row->sikap10;
+
+                                            if($i==6){
+                                                $kd1_sikap[$gg] = $nil_kd1_sikap/16*100;
+                                                $kd2_sikap[$gg] = $nil_kd2_sikap/16*100;
+                                                $kd3_sikap[$gg] = $nil_kd3_sikap/16*100;
+                                                $kd4_sikap[$gg] = $nil_kd4_sikap/16*100;
+                                                $kd5_sikap[$gg] = $nil_kd5_sikap/16*100;
+                                                $kd6_sikap[$gg] = $nil_kd6_sikap/16*100;
+                                                $kd7_sikap[$gg] = $nil_kd7_sikap/16*100;
+                                                $kd8_sikap[$gg] = $nil_kd8_sikap/16*100;
+                                                $kd9_sikap[$gg] = $nil_kd9_sikap/16*100;
+                                                $kd10_sikap[$gg] = $nil_kd10_sikap/16*100;
+                                                $rata_sikap = ($kd1_sikap[$gg] + $kd2_sikap[$gg] + $kd3_sikap[$gg] + $kd4_sikap[$gg] + $kd5_sikap[$gg] + $kd6_sikap[$gg] + $kd7_sikap[$gg] + $kd8_sikap[$gg] + $kd9_sikap[$gg] +  $kd10_sikap[$gg])/10;
+                                                $nilai_sikap = $rata_sikap;
+
+                                                if($nilai_sikap >=85 && $nilai_sikap<=100){
+                                                    $predikat_sikap = 'A';
+                                                    $label_sikap = 'label-success';
+                                                    $lulus ="LULUS";
+                                                }
+                                                else if($nilai_sikap >=75 && $nilai_sikap < 85){
+                                                    $predikat_sikap = 'B';
+                                                    $label_sikap = 'label-success';
+                                                    $lulus ="LULUS";
+                                                }
+                                                else if($nilai_sikap >=65 && $nilai_sikap < 75){
+                                                    $predikat_sikap = 'C';
+                                                    $label_sikap = 'label-warning';
+                                                    $lulus ="LULUS";
+                                                }
+                                                else if($nilai_sikap >=45 && $nilai_sikap < 65){
+                                                    $predikat_sikap = 'D';
+                                                    $label_sikap = 'label-warning';
+                                                    $lulus ="TIDAK LULUS";
+                                                }
+                                                else{
+                                                    $lulus ="TIDAK LULUS";
+                                                    $predikat_sikap = 'E';
+                                                    $label_sikap = 'label-danger';
                                                 }
 
-                                                $rerata[$j] = $rata;
-                                                $nilai_pengetahuan[$j] = $nilai;
-                                                $predikatnya[$j] = $predikat;
-                                                $status[$j] = $lulus;
-
-                                                $nil_kd1 = 0;
-                                                $nil_kd2 = 0;
-                                                $nil_kd3 = 0;
-                                                $nil_kd4 = 0;
-                                                $nil_kd5 = 0;
-                                                $nil_kd6 = 0;
-                                                $nil_kd7 = 0;
-                                                $nil_kd8 = 0;
-                                                $nil_kd9 = 0;
-                                                $nil_kd10 = 0;
-                                                $nilai = 0;
-                                                $rata = 0;
+                                                $rerata_sikap[$gg] = $nilai_sikap;
+                                                $predikatnya_sikap[$gg] = $predikat_sikap;
+                                                $nil_kd1_sikap = 0;
+                                                $nil_kd2_sikap = 0;
+                                                $nil_kd3_sikap = 0;
+                                                $nil_kd4_sikap = 0;
+                                                $nil_kd5_sikap = 0;
+                                                $nil_kd6_sikap = 0;
+                                                $nil_kd7_sikap = 0;
+                                                $nil_kd8_sikap = 0;
+                                                $nil_kd9_sikap = 0;
+                                                $nil_kd10_sikap = 0;
+                                                $nilai_sikap = 0;
+                                                $rata_sikap = 0;
                                                 $i = 1;
-                                                $j++;
-                                            } // end if
+                                                $gg++;
+                                            }
                                             else{
                                                 $i++;
                                             } 
-                                        } // end foreach
+                                        }
 
-
-
-
-
-
-
-
-
-                        $i = 1;
-                        $j = 0;
-                        $no = 1;
-
-                        $nilai_keterampilan = [];
-                        $predikat = '';
-                        $lulus = '';
-                        foreach ($data_keterampilan->result() as $row) {
-                            $nilai_keterampilan[$j] = ($row->k1 + $row->k2 + $row->k3 + $row->k4 + $row->k5 + $row->k6 + $row->k7 + $row->k8 + $row->k9 + $row->k10)/30*100;
-                            if($nilai_keterampilan[$j] >=93 && $nilai_keterampilan[$j]<=100){
-                                $predikat = 'A';
-                                $label = 'label-success';
-                                $lulus ="T";
-                            }
-                            else if($nilai_keterampilan[$j] >=85 && $nilai_keterampilan[$j] < 92){
-                                $predikat = 'B';
-                                $label = 'label-success';
-                                $lulus ="T";
-                            }
-                            else if($nilai_keterampilan[$j] >=75 && $nilai_keterampilan[$j] < 84){
-                                $predikat = 'C';
-                                $label = 'label-warning';
-                                $lulus ="T";
-                            }
-                            else {
-                                $predikat = 'D';
-                                $label = 'label-danger';
-                                $lulus ="TT";
-                            }
-                                     
-                    
-                   $j++;
-                    $i++; $no++;
-                        }
-                    
-
-
-
-
-
-
-
-
-
-
-
-$i = 1;
-                        $no = 1;
-                        $gg = 0;
-                        $nil_kd1_sikap = 0;
-                        $nil_kd2_sikap = 0;
-                        $nil_kd3_sikap = 0;
-                        $nil_kd4_sikap = 0;
-                        $nil_kd5_sikap = 0;
-                        $nil_kd6_sikap = 0;
-                        $nil_kd7_sikap = 0;
-                        $nil_kd8_sikap = 0;
-                        $nil_kd9_sikap = 0;
-                        $nil_kd10_sikap = 0;
-                        $nilai_sikap = 0;
-                        $kd1_sikap = [];
-                        $kd2_sikap = [];
-                        $kd3_sikap = [];
-                        $kd4_sikap = [];
-                        $kd5_sikap = [];
-                        $kd6_sikap = [];
-                        $kd7_sikap = [];
-                        $kd8_sikap = [];
-                        $kd9_sikap = [];
-                        $kd10_sikap = []; 
-                        $rerata_sikap = [];
-                        $predikatnya_sikap = [];
-                        $rata_sikap = 0;
-                        $label_sikap = '';
-
-                    foreach ($data_sikap->result() as $row) {
-                        $nil_kd1_sikap = $nil_kd1_sikap + $row->sikap1;
-                        $nil_kd2_sikap = $nil_kd2_sikap + $row->sikap2;
-                        $nil_kd3_sikap = $nil_kd3_sikap + $row->sikap3;
-                        $nil_kd4_sikap = $nil_kd4_sikap + $row->sikap4;
-                        $nil_kd5_sikap = $nil_kd5_sikap + $row->sikap5;
-                        $nil_kd6_sikap = $nil_kd6_sikap + $row->sikap6;
-                        $nil_kd7_sikap = $nil_kd7_sikap + $row->sikap7;
-                        $nil_kd8_sikap = $nil_kd8_sikap + $row->sikap8;
-                        $nil_kd9_sikap = $nil_kd9_sikap + $row->sikap9;
-                        $nil_kd10_sikap = $nil_kd10_sikap + $row->sikap10;
-
-                        
-                        if($i==6){
-                            $kd1_sikap[$gg] = $nil_kd1_sikap/16*100;
-                            $kd2_sikap[$gg] = $nil_kd2_sikap/16*100;
-                            $kd3_sikap[$gg] = $nil_kd3_sikap/16*100;
-                            $kd4_sikap[$gg] = $nil_kd4_sikap/16*100;
-                            $kd5_sikap[$gg] = $nil_kd5_sikap/16*100;
-                            $kd6_sikap[$gg] = $nil_kd6_sikap/16*100;
-                            $kd7_sikap[$gg] = $nil_kd7_sikap/16*100;
-                            $kd8_sikap[$gg] = $nil_kd8_sikap/16*100;
-                            $kd9_sikap[$gg] = $nil_kd9_sikap/16*100;
-                            $kd10_sikap[$gg] = $nil_kd10_sikap/16*100;
-                            $rata_sikap = ($kd1_sikap[$gg] + $kd2_sikap[$gg] + $kd3_sikap[$gg] + $kd4_sikap[$gg] + $kd5_sikap[$gg] + $kd6_sikap[$gg] + $kd7_sikap[$gg] + $kd8_sikap[$gg] + $kd9_sikap[$gg] +  $kd10_sikap[$gg])/10;
-                            $nilai_sikap = $rata_sikap;
-
-                            if($nilai_sikap >=85 && $nilai_sikap<=100){
-                            $predikat_sikap = 'A';
-                            $label_sikap = 'label-success';
-                            $lulus ="LULUS";
-
-                            }
-                            else if($nilai_sikap >=75 && $nilai_sikap < 85){
-
-                            $predikat_sikap = 'B';
-                            $label_sikap = 'label-success';
-                            $lulus ="LULUS";
-                            }
-                            else if($nilai_sikap >=65 && $nilai_sikap < 75){
-
-                            $predikat_sikap = 'C';
-                            $label_sikap = 'label-warning';
-                            $lulus ="LULUS";
-                            }
-                            else if($nilai_sikap >=45 && $nilai_sikap < 65){
-
-                            $predikat_sikap = 'D';
-                            $label_sikap = 'label-warning';
-                            $lulus ="TIDAK LULUS";
-                            }
-                            else{
-
-                            $lulus ="TIDAK LULUS";
-                            $predikat_sikap = 'E';
-                            $label_sikap = 'label-danger';
-                            }
-
-                            $rerata_sikap[$gg] = $nilai_sikap;
-                            $predikatnya_sikap[$gg] = $predikat_sikap;
-                            // echo $kd1[$gg];
-                            $nil_kd1_sikap = 0;
-                            $nil_kd2_sikap = 0;
-                            $nil_kd3_sikap = 0;
-                            $nil_kd4_sikap = 0;
-                            $nil_kd5_sikap = 0;
-                            $nil_kd6_sikap = 0;
-                            $nil_kd7_sikap = 0;
-                            $nil_kd8_sikap = 0;
-                            $nil_kd9_sikap = 0;
-                            $nil_kd10_sikap = 0;
-                            $nilai_sikap = 0;
-                            $rata_sikap = 0;
-                            $i = 1;
-                            $gg++;
-                        }
-                        else{
-
-                        $i++;
-                        } 
-                    }
-
-                        $i=1;
-                        $nil_kd1 = 0;
-                        $gg = 0;
-                            $nil_kd2 = 0;
-                            $nil_kd3 = 0;
-                            $nil_kd4 = 0;
-                            $nil_kd5 = 0;
-                            $nil_kd6 = 0;
-                            $nil_kd7 = 0;
-                            $nil_kd8 = 0;
-                            $nil_kd9 = 0;
-                            $nil_kd10 = 0;
-                            $nilai = 0;
-                            $nilai_uas = 0;
-                            $nilai_uts = 0;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-$gg=0;
-$i=1;
-$no = 1;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        
-                                        
                                         $i=1;
-                                        $nil_kd1 = 0;
+                                        $gg = 0;
+                                        $no = 1;
                                         $j = 0;
-                                        $nil_kd2 = 0;
                                         $nil_kd3 = 0;
                                         $nil_kd4 = 0;
                                         $nil_kd5 = 0;
@@ -565,6 +458,7 @@ $no = 1;
                                         $nilai = 0;
                                         $nilai_uas = 0;
                                         $nilai_uts = 0;
+
                                         foreach ($data_pengetahuan->result() as $row) {
                                             if($i == 5) {
                                                 $i = 1;
@@ -572,151 +466,32 @@ $no = 1;
                                             }
                                             if($i == 1){
                                         ?>
-                                        <tr style="text-align: left !important;"> 
-                                            <td><?php echo $no ?></td>
-                                            <td class="nama"><?php echo $row->nama_siswa ?></td>
-                                            <td>
-                                                <?php echo number_format($nilai_pengetahuan[$j]) ?>
-                                            </td>
-                                            <td>
-                                                <?php echo number_format($nilai_keterampilan[$j]) ?>
-                                            </td>
-                                            <td>
-                                                <?php echo number_format($rerata_sikap[$j]) ?>
-                                            </td>
-                                            <td>
-                                                <a type="button" title="Lihat Detail <?php echo $row->nama_siswa ?>" data-toggle="modal" data-target="#myModal" title="Lihat Detail" id="<?php echo $row->id_siswa ?>" class="btn btn-xs btn-primary">
-                                                    <i class="ace-icon fa fa-eye bigger-120"></i>
-                                                </a>
-                                                <a href="<?php echo base_url()?>index.php/hasil/cetak_detail/<?php echo $row->id_guru ?>/<?php echo $row->id_siswa ?>" title="Cetak Detail <?php echo $row->nama_siswa ?>" id="<?php echo $row->no_induk ?><?php echo $i ?>kd1" class="btn btn-xs btn-success">
-                                                    <i class="ace-icon fa fa-print bigger-120"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                                <tr style="text-align: left !important;"> 
+                                                    <td><?php echo $no ?></td>
+                                                    <td><?php echo $row->no_induk ?></td>
+                                                    <td class="nama"><?php echo $row->nama_siswa ?></td>
+                                                    <td><?php echo number_format($nilai_pengetahuan[$j]) ?></td>
+                                                    <td><?php echo number_format($nilai_keterampilan[$j]) ?></td>
+                                                    <td><?php echo number_format($rerata_sikap[$j]) ?></td>
+                                                    <td>
+                                                        <a type="button" title="Lihat Detail <?php echo $row->nama_siswa ?>" data-toggle="modal" data-target="#myModal" title="Lihat Detail" id="<?php echo $row->id_siswa ?>" class="btn btn-xs btn-primary">
+                                                            <i class="ace-icon fa fa-eye bigger-120"></i>
+                                                        </a>
+                                                        <a href="<?php echo base_url()?>index.php/hasil/cetak_detail/<?php echo $row->id_guru ?>/<?php echo $row->id_siswa ?>" title="Cetak Detail <?php echo $row->nama_siswa ?>" id="<?php echo $row->no_induk ?><?php echo $i ?>kd1" class="btn btn-xs btn-success">
+                                                            <i class="ace-icon fa fa-print bigger-120"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
                                         <?php 
-                                            $j++;
+                                                $j++;
                                             } // end if
+                                        $i++; 
+                                        $no++;
+                                        } // end foreach
                                         ?>
-                                                          
-                                        <?php
-                                            $i++; 
-                                            $no++;
-                                            }
-                                        ?>
-                                    </tbody>
-                </table>
-
-
-                            </div>
-
-
-
-
-
-
-
-<!-- <button type="button" id="ggwp" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
-
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" style="text-align: center;">Detail Nilai <b><span id="detail_nama"></span></b></h4>
-      </div>
-      <div class="modal-body">
-        <p style="text-align: center;"><b>Mata Pelajaran : <?php echo $row->mata_pelajaran ?></b></p>
-
-        <ul class="nav nav-tabs" id="myTab" >
-            <li class="active" style="background-color: red;">
-                <a  data-toggle="tab" href="#pengetahuan">
-                    Pengetahuan
-                </a>
-            </li>
-
-            <li>
-                <a style="background-color: yellow !important; color:black" data-toggle="tab" href="#keterampilan">
-                    Keterampilan
-                </a>
-            </li>
-            <li ;">
-                <a style="background-color: #2E8965 !important; color:white" data-toggle="tab" href="#sikap">
-                    Sikap
-                </a>
-            </li>
-        </ul>
-
-
-        <div class="tab-content">
-            <div id="pengetahuan" class="tab-pane fade in active">
-                <table>
-                    <thead style="background-color: #2E8965; color:white">
-                        <tr>
-                            <th>Kompetensi</th>
-                            <th>P 1</th>
-                            <th>P 2</th>
-                            <th>P 3</th>
-                            <th>Rata-Rata</th>
-                        </tr>
-                    </thead>
-                    <tbody id="detail-nilai">
-
-                    </tbody>
-                </table>
-            </div>
-
-            <div id="keterampilan" class="tab-pane fade">
-                <table>
-                    <thead style="background-color: #2E8965; color:white">
-                        <tr>
-                            <th>Kinerja</th>
-                            <th>Nilai</th>
-                        </tr>
-                    </thead>
-                    <tbody id="detail-keterampilan">
-
-                    </tbody>
-                </table>
-            </div>
-            <div id="sikap" class="tab-pane fade">
-                <table>
-                    <thead style="background-color: #2E8965; color:white">
-                        <tr>
-                            <th>Sikap</th>
-                            <th>PP</th>
-                            <th>PS</th>
-                            <th>PD</th>
-                            <th>PBJ</th>
-                            <th>PKJ</th>
-                            <th>PPD</th>
-                            <th>Rata-Rata</th>
-                        </tr>
-                    </thead>
-                    <tbody id="detail-sikap">
-
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-
-        
-      </div>
-      <div class="modal-footer">
-        <p style="float: left; text-align: left;">Ket : <br>P = Pertemuan, K = Kinerja, S = Sikap</p>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-
-
-
-
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <!-- PAGE CONTENT ENDS -->
                             </div><!-- /.col -->
                         </div><!-- /.row -->
@@ -731,13 +506,104 @@ $no = 1;
                             <span class="blue bolder">CV. LOCALHOUSE</span>
                             Application &copy; 2018
                         </span>
-
                     </div>
                 </div>
             </div>
 
 
         </div><!-- /.main-container -->
+
+        <!-- Modal Untuk Lihat Detail Nilai -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+            <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                       <button type="button" class="close" data-dismiss="modal">&times;</button>
+                       <h4 class="modal-title" style="text-align: center;">Detail Nilai <b><span id="detail_nama"></span></b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p style="text-align: center;"><b>Mata Pelajaran : <?php echo $row->mata_pelajaran ?></b></p>
+                        <ul class="nav nav-tabs" id="myTab" >
+                            <li class="active" style="background-color: red;">
+                                <a data-toggle="tab" href="#pengetahuan">Pengetahuan</a>
+                            </li>
+                            <li>
+                                <a style="background-color: yellow !important; color:black" data-toggle="tab" href="#keterampilan">
+                                    Keterampilan
+                                </a>
+                            </li>
+                            <li>
+                                <a style="background-color: #2E8965 !important; color:white" data-toggle="tab" href="#sikap">
+                                    Sikap
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="pengetahuan" class="tab-pane fade in active">
+                                <table>
+                                    <thead style="background-color: #2E8965; color:white">
+                                        <tr>
+                                            <th>Kompetensi</th>
+                                            <th>P 1</th>
+                                            <th>P 2</th>
+                                            <th>P 3</th>
+                                            <th>Rata-Rata</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="detail-nilai">
+                                        <!-- ini diisi menggunakan ajax -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="keterampilan" class="tab-pane fade">
+                                <table>
+                                    <thead style="background-color: #2E8965; color:white">
+                                        <tr>
+                                            <th>Kinerja</th>
+                                            <th>Nilai</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="detail-keterampilan">
+                                        <!-- ini diisi menggunakan ajax -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="sikap" class="tab-pane fade">
+                                <table>
+                                    <thead style="background-color: #2E8965; color:white">
+                                        <tr>
+                                            <th>Sikap</th>
+                                            <th>PP</th>
+                                            <th>PS</th>
+                                            <th>PD</th>
+                                            <th>PBJ</th>
+                                            <th>PKJ</th>
+                                            <th>PPD</th>
+                                            <th>Rata-Rata</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="detail-sikap">
+                                        <!-- ini diisi menggunakan ajax -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div> <!-- end tab content -->
+
+                    </div> <!-- end modal body -->
+                    <div class="modal-footer">
+                        <p style="float: left; text-align: left;">Ket : <br>P = Pertemuan, K = Kinerja, S = Sikap</p>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div> <!-- end modal content -->
+            </div>
+        </div>
+
+
 
         <!-- basic scripts -->
 
@@ -752,18 +618,16 @@ $no = 1;
         <script src="<?php echo base_url()?>assets/js/ace.min.js"></script>
 
         <script>
-            $(document).ready(function(){
+        $(document).ready(function(){
 
             // untuk tombol update nilai menggunakan ajax
-        $('a[type=button]').on('click', function(){
-            var btn = $(this).attr('id');
-            $.ajax({
+            $('a[type=button]').on('click', function(){
+                var btn = $(this).attr('id');
+                $.ajax({
                     url: "<?php echo base_url() ?>index.php/pengetahuan/get_pengetahuan/<?php echo $kunci ?>/"+btn,
                     type: "POST",
-                    // data: $('#'+($(this).attr('id')).slice(0,-3)).serialize(),
                     dataType: 'json',
                     success: function(data){
-                        // $('#'+siswanya+'uas_1').val()
                         isinya = '';
                         warna_1 = '';
                         warna_2 = '';
@@ -774,9 +638,6 @@ $no = 1;
                         warna_uas = '';
                         warna_nilai_akhir = '';
                         nilai_pengetahuan = 0;
-
-                    // var data = JSON.parse(this.responseText);
-                        // console.log(data);
                         no=1;
                         rerata = 0;
                         total = 0;
@@ -833,8 +694,6 @@ $no = 1;
                             else
                                 warna_nilai_akhir = 'green';
 
-                        // document.getElementById('detail_uas').innerHTML = data['uas'];
-                        // document.getElementById('detail_uts').innerHTML = data['uts'];
                         isinya +="<tr>";
                         isinya +="<td colspan=4>RATA-RATA TOTAL</td>";
                         isinya +="<td style='color:"+warna_total+"'><b>"+total/10+"</b></td>";
@@ -859,9 +718,7 @@ $no = 1;
                     }
                 }); 
 
-
-
-            $.ajax({
+                $.ajax({
                     url: "<?php echo base_url() ?>index.php/keterampilan/get_keterampilan/<?php echo $kunci ?>/"+btn,
                     type: "POST",
                     dataType: 'json',
@@ -910,7 +767,7 @@ $no = 1;
                     }
                 }); 
 
-            $.ajax({
+                $.ajax({
                     url: "<?php echo base_url() ?>index.php/sikap/get_sikap/<?php echo $kunci ?>/"+btn,
                     type: "POST",
                     // data: $('#'+($(this).attr('id')).slice(0,-3)).serialize(),
@@ -928,9 +785,6 @@ $no = 1;
                         warna_total = '';
                         warna_nilai_akhir = '';
                         nilai_sikap = 0;
-
-                    // var data = JSON.parse(this.responseText);
-                        // console.log(data);
                         no=1;
                         rerata = 0;
                         total = 0;
@@ -1016,13 +870,7 @@ $no = 1;
                         alert('ada kesalahan jaringan');
                     }
                 }); 
-
-
-
-
-        
-        });
-
+            });
         });
         </script>
 

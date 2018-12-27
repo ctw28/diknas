@@ -104,7 +104,7 @@
                         <b class="arrow"></b>
                     </li>                   
 
-                    <li>
+                    <li class="active open">
                         <a href="" class="dropdown-toggle">
                             <i class="menu-icon fa fa-list"></i>
                             <span class="menu-text"> Pengaturan </span>
@@ -123,7 +123,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="">
+                            <li class="active">
                                 <a href="<?php echo base_url()?>/index.php/pengaturan/siswa">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Siswa
@@ -158,9 +158,9 @@
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
 
-                                        <h2>Form Edit Data Siswa</h2>
+                                <h2>Form Data Siswa</h2>
 
-                            <?php echo form_open_multipart('pengaturan/update_siswa', 'class="form-horizontal"', 'role="form"'); ?>
+                                <?php echo form_open_multipart('pengaturan/update_siswa', 'class="form-horizontal"', 'role="form"'); ?>
                                     
                                 <input type="hidden" name="id_siswa" value="">
                                     <div class="form-group">
@@ -194,14 +194,6 @@
                                     </div>
 
                                 </form>
-
-
-
-
-
-
-
-
                                 <!-- PAGE CONTENT ENDS -->
                             </div><!-- /.col -->
                         </div><!-- /.row -->

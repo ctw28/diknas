@@ -18,6 +18,7 @@ class Dashboard extends CI_Controller {
 		}
 	
 		$isi['data_mata_pelajaran'] = $this->pengaturan_model->get_data_mata_pelajaran();
+		$isi['data_siswa'] = $this->pengaturan_model->get_data_siswa();
 
 		// echo $isi['id_guru'];
 
