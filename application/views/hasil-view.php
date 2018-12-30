@@ -176,7 +176,7 @@
                                 </div><!-- /.widget-container-col -->
 
                                 <div class="col-sm-12">
-                                    <table class="tabel-nilai">
+                                    <table class="tabel-nilai m-b-10" id="tblData">
                                         <thead>
                                             <tr> 
                                                 <th rowspan="2">NO</th>
@@ -491,6 +491,8 @@
                                         ?>
                                         </tbody>
                                     </table>
+                                    <!-- untuk pagination -->
+                                    <div class="pull-right" id="pagination"></div>
                                 </div>
                                 <!-- PAGE CONTENT ENDS -->
                             </div><!-- /.col -->
@@ -617,8 +619,47 @@
         <script src="<?php echo base_url()?>assets/js/ace-elements.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/ace.min.js"></script>
 
+
         <script>
         $(document).ready(function(){
+            var totalRows = $('#tblData').find('tbody tr:has(td)').length;
+            var recordPerPage = 10;
+            var totalPages = Math.ceil(totalRows / recordPerPage);
+            var $pages = $('<div id="pages">Halaman </div>');
+            
+            for (i = 0; i < totalPages; i++) {
+                $('<span class="pageNumber" id="'+i+'">' + (i + 1) + '</span>').appendTo($pages);
+            }
+            $pages.appendTo('#pagination');
+
+            $('#0').addClass('focus_active');
+
+            $('.pageNumber').hover(
+                function() {
+                  $(this).addClass('focus');
+                },
+                function() {
+                  $(this).removeClass('focus');
+                }
+            );
+
+            $('#tblData').find('tbody tr:has(td)').hide();
+            var tr = $('#tblData tbody tr:has(td)');
+            for (var i = 0; i <= recordPerPage - 1; i++) {
+              $(tr[i]).show();
+            }
+            $('.pageNumber').click(function(event) {
+                $('.pageNumber').removeClass('focus_active');
+                pagenya = $(this).attr('id');
+                console.log('#'+pagenya);
+                $('#'+pagenya).addClass('focus_active');
+                $('#tblData').find('tbody tr:has(td)').hide();
+                var nBegin = ($(this).text() - 1) * recordPerPage;
+                var nEnd = $(this).text() * recordPerPage - 1;
+                for (var i = nBegin; i <= nEnd; i++) {
+                    $(tr[i]).show();
+                }
+            });
 
             // untuk tombol update nilai menggunakan ajax
             $('a[type=button]').on('click', function(){

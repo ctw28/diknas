@@ -11,6 +11,9 @@ table thead, .tabel-nilai th, .tabel-nilai td{
 .m-t-25{
   margin-top: 25px;
 }
+.m-b-10{
+  margin-bottom: 10px;
+}
 input { 
 	width: 50px 
 }
@@ -40,15 +43,29 @@ h2{
 	border: 1px solid red !important;
 }
 
-.focus {
-  background-color: #ff00ff;
-  color: #fff;
+.focus, .focus_active {
+  color: #fff !important;
   cursor: pointer;
   font-weight: bold;
 }
+.focus{
+  background-color: #363636;
+
+}
+.focus_active{
+  background-color: #2E8965;  
+  color: #fff !important;
+}
+#pages{
+  font-size: 14px;
+}
 .pageNumber {
-  margin-top: 150px !important;
-  padding: 5px;
+  color: #2E8965;
+  padding: 5px 10px;
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #f0f0f0;
+  border-radius: 5px;
 }
 .mata_pelajaran{
 	text-transform: uppercase;

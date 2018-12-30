@@ -34,7 +34,7 @@
 		<div class="container-login100">
 			<div class="wrap-login100 p-b-160 p-t-50" >
 				<form class="login100-form validate-form" method="post" action="<?php echo base_url()?>index.php/login/getlogin">
-
+  
 					<span class="login100-form-title p-b-43">
 						<p><img src="<?php echo base_url()?>assets/login/images/dikbud.png" alt="AVATAR" width="20%"></p><br> Login Aplikasi <b>Hasil</b> Belajar
 					</span>
@@ -55,9 +55,13 @@
 							Login
 						</button>
 					</div>
-					
-
 				</form>
+				<?php
+		            $info = $this->session->flashdata('info');
+		            if (!empty($info)) {
+		                echo "<p style='text-align:center; color:white; margin-top:20px;'><b>$info</b></p>";
+		            }
+	          	?> 
 			</div>
 		</div>
 	</div>

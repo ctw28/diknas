@@ -162,15 +162,15 @@
                                     <i class="fa fa-plus m-r-5"></i>
                                 Tambah Siswa
                                 </a>
-                                <div class="widget-box widget-color-green2" id="widget-box-2" data-color="#2E8965">
+                                <div class="widget-box widget-color-green2 m-b-10" id="widget-box-2" data-color="#2E8965">
                                     <div class="widget-header text-center">
                                         <h3 class="widget-title bigger lighter">
                                             Daftar Siswa
                                         </h3>                                            
                                     </div>
-                                    <div class="widget-body">
-                                        <div class="widget-main no-padding">
-                                            <table>
+                                    <div class="widget-body m-b-10">
+                                        <div class="widget-main no-padding ">
+                                            <table id="tblData">
                                                 <thead>
                                                     <tr> 
                                                         <th>NO</th>
@@ -204,7 +204,8 @@
                                         </div> <!-- end widget-main -->
                                     </div> <!-- end widget-body -->
                                 </div> <!-- end widget-box -->
-
+                                <!-- untuk pagination -->
+                                <div class="pull-right" id="pagination"></div>
                                 <!-- PAGE CONTENT ENDS -->
                             </div><!-- /.col -->
                         </div><!-- /.row -->
@@ -238,6 +239,51 @@
         <!-- ace scripts -->
         <script src="<?php echo base_url()?>assets/js/ace-elements.min.js"></script>
         <script src="<?php echo base_url()?>assets/js/ace.min.js"></script>
+
+        <script>
+        $(document).ready(function(){
+            var totalRows = $('#tblData').find('tbody tr:has(td)').length;
+            var recordPerPage = 10;
+            var totalPages = Math.ceil(totalRows / recordPerPage);
+            var $pages = $('<div id="pages">Halaman </div>');
+            
+            for (i = 0; i < totalPages; i++) {
+                $('<span class="pageNumber" id="'+i+'">' + (i + 1) + '</span>').appendTo($pages);
+            }
+            $pages.appendTo('#pagination');
+
+            $('#0').addClass('focus_active');
+
+            $('.pageNumber').hover(
+                function() {
+                  $(this).addClass('focus');
+                },
+                function() {
+                  $(this).removeClass('focus');
+                }
+            );
+
+            $('#tblData').find('tbody tr:has(td)').hide();
+            var tr = $('#tblData tbody tr:has(td)');
+            for (var i = 0; i <= recordPerPage - 1; i++) {
+              $(tr[i]).show();
+            }
+            $('.pageNumber').click(function(event) {
+
+                // $('.pageNumber').addClass('focus');
+                $('.pageNumber').removeClass('focus_active');
+                pagenya = $(this).attr('id');
+                console.log('#'+pagenya);
+                $('#'+pagenya).addClass('focus_active');
+                $('#tblData').find('tbody tr:has(td)').hide();
+                var nBegin = ($(this).text() - 1) * recordPerPage;
+                var nEnd = $(this).text() * recordPerPage - 1;
+                for (var i = nBegin; i <= nEnd; i++) {
+                    $(tr[i]).show();
+                }
+            });
+        });
+        </script>
 
     </body>
 </html>

@@ -21,8 +21,6 @@ class Pengaturan_model extends CI_Model {
                 $this->db->update('t_guru', $data);
         }
 
-
-
         public function cek_siswa($key)
         {
                 $this->db->where('id_siswa',$key);

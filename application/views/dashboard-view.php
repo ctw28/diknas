@@ -153,19 +153,19 @@
                                         <!-- <div class="widget-main" > -->
                                         <div class="col-md-4 col-xs-4" style="color:  #2E8965; margin-top: 25px;">
                                             <div class="infobox-progress">
-                                                <h3 style="margin:0 !important;"><i class="fa fa-child"></i> 34 <br> TOTAL SISWA</h3>
+                                                <h3 style="margin:0 !important;"><i class="fa fa-child"></i> <?php echo $data_siswa->num_rows() ?> <br> TOTAL SISWA</h3>
                                             </div>
                                             <div class="infobox-data"></div>
                                         </div>
                                         <div class="col-md-4 col-xs-4" style="color:  #2E8965; margin-top: 25px;">
                                             <div class="infobox-progress">
-                                                <h3 style="margin:0 !important;"><i class="fa fa-book"></i> 9 <br> TOTAL MATA PELAJARAN WAJIB</h3>
+                                                <h3 style="margin:0 !important;"><i class="fa fa-book"></i> <?php echo $data_mata_pelajaran->num_rows() ?> <br> TOTAL MATA PELAJARAN WAJIB</h3>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4 col-xs-4" style="color:  #2E8965; margin-top: 25px;">
                                             <div class="infobox-progress">
-                                                <h3 style="margin:0 !important;"><i class="fa fa-tasks"></i> 5 <br> TOTAL MATA PELAJARAN PILIHAN</h3>
+                                                <h3 style="margin:0 !important;"><i class="fa fa-tasks"></i> <?php echo $data_mata_pelajaran->num_rows() ?> <br> TOTAL MATA PELAJARAN PILIHAN</h3>
                                             </div>
                                         </div>                               
                                         <!-- </div> -->
@@ -179,7 +179,7 @@
                                         <div class="widget-box widget-color-green2" id="widget-box-2" data-color="#2E8965">
                                             <div class="widget-header">
                                                 <h5 class="widget-title bigger lighter"><i class="ace-icon fa fa-table"></i>
-                                                    Daftar Mata Pelajaran Wajib
+                                                    Daftar Mata Pelajaran Wajib 
                                                 </h5>
                                             </div>
 
@@ -268,7 +268,7 @@
 
 
                                 <div class="col-xs-12 col-sm-6 widget-container-col m-t-25" id="widget-container-col-2">
-                                    <div class="widget-box widget-color-green2" id="widget-box-2" data-color="#2E8965">
+                                    <div class="widget-box widget-color-green2 m-b-10" id="widget-box-2" data-color="#2E8965">
                                         <div class="widget-header">
                                             <h5 class="widget-title bigger lighter"><i class="ace-icon fa fa-table"></i>
                                                 Daftar Siswa
@@ -308,6 +308,8 @@
                                             </div> <!-- end widget-main -->
                                         </div> <!-- end widget-body -->
                                     </div> <!-- end widget-box -->
+                                    <!-- untuk pagination -->
+                                    <div class="pull-right" id="pagination"></div>
                                 </div><!-- end container daftar siswa -->
                             </div> <!-- end container semua daftar -->
                         <!-- PAGE CONTENT ENDS -->
@@ -344,16 +346,17 @@
 
         <script>
         $(document).ready(function(){
-
             var totalRows = $('#tblData').find('tbody tr:has(td)').length;
             var recordPerPage = 10;
             var totalPages = Math.ceil(totalRows / recordPerPage);
-            var $pages = $('<div id="pages"></div>');
+            var $pages = $('<div id="pages">Halaman </div>');
             
             for (i = 0; i < totalPages; i++) {
-                $('<span class="pageNumber">&nbsp;' + (i + 1) + '</span>').appendTo($pages);
+                $('<span class="pageNumber" id="'+i+'">' + (i + 1) + '</span>').appendTo($pages);
             }
             $pages.appendTo('#pagination');
+
+            $('#0').addClass('focus_active');
 
             $('.pageNumber').hover(
                 function() {
@@ -369,9 +372,13 @@
             for (var i = 0; i <= recordPerPage - 1; i++) {
               $(tr[i]).show();
             }
-            $('span').click(function(event) {
+            $('.pageNumber').click(function(event) {
 
-                $(this).addClass('focus');
+                // $('.pageNumber').addClass('focus');
+                $('.pageNumber').removeClass('focus_active');
+                pagenya = $(this).attr('id');
+                console.log('#'+pagenya);
+                $('#'+pagenya).addClass('focus_active');
                 $('#tblData').find('tbody tr:has(td)').hide();
                 var nBegin = ($(this).text() - 1) * recordPerPage;
                 var nEnd = $(this).text() * recordPerPage - 1;

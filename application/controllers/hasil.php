@@ -63,11 +63,10 @@ class Hasil extends CI_Controller {
 
 
 
-
         $pdf = new FPDF('l','mm','A4');
-        $pdf->AddPage('P');
+        $pdf->AddPage('L');
         $pdf->SetFont('Arial','B',10);
-        $pdf->Cell(190,7,'HASIL PENILAIAN BELAJAR',0,1,'C');
+        $pdf->Cell(190,7,'LAPORAN HASIL PENILAIAN BELAJAR',0,1,'C');
         // Memberikan space kebawah agar tidak terlalu rapat
         $pdf->SetFont('Arial','B',9);
         $pdf->Cell(10,7,'',0,1);
@@ -92,13 +91,11 @@ class Hasil extends CI_Controller {
         $pdf->SetFont('Arial','B',9);
         $pdf->Cell(10,7,'',0,1);
 
-        $pdf->Cell(20,6,'A. PENILAIAN PENGETAHUAN',0,0);
 
-        $pdf->Cell(10,7,'',0,1);
 
         $pdf->SetFont('Arial','B',9);
         $pdf->Cell(10,10,'NO',1,0,'C');
-        $pdf->Cell(45,10,'MATA PELAJARAN',1,0,'C');
+        $pdf->Cell(60,10,'MATA PELAJARAN',1,0,'C');
         $pdf->Cell(12,10,'NILAI',1,0,'C');
         $pdf->Cell(12,10,'PRED',1,0,'C');
         $pdf->Cell(45,10,'DESKRIPSI',1,0,'C');
@@ -288,7 +285,7 @@ class Hasil extends CI_Controller {
 
 				if($line == $line_keterampilan){
 			        $pdf->Cell(10,($line * 6),$i,1,0,'C');
-			        $pdf->Cell(45,($line * 6),$row->mata_pelajaran,1,0);
+			        $pdf->Cell(60,($line * 6),$row->mata_pelajaran,1,0);
 			        $pdf->Cell(12,($line * 6),number_format($nilai_pengetahuan[$i-1],2),1,0,'C');
 			        $pdf->Cell(12,($line * 6),$predikatnya[$i-1],1,0,'C');
 			        $xPos = $pdf->GetX();
@@ -303,7 +300,7 @@ class Hasil extends CI_Controller {
 				}
 				else if($line > $line_keterampilan){
 			        $pdf->Cell(10,(($line-1) * 6),$i,1,0,'C');
-			        $pdf->Cell(45,(($line-1) * 6),$row->mata_pelajaran,1,0);
+			        $pdf->Cell(60,(($line-1) * 6),$row->mata_pelajaran,1,0);
 			        $pdf->Cell(12,(($line-1) * 6),number_format($nilai_pengetahuan[$i-1],2),1,0,'C');
 			        $pdf->Cell(12,(($line-1) * 6),$predikatnya[$i-1],1,0,'C');
 			        $xPos = $pdf->GetX();
@@ -316,7 +313,7 @@ class Hasil extends CI_Controller {
 			        $pdf->setXY(10, $yPos+($line-1)*6);
 				}else{
 			        $pdf->Cell(10,($line_keterampilan * 6),$i,1,0,'C');
-			        $pdf->Cell(45,($line_keterampilan * 6),$row->mata_pelajaran,1,0);
+			        $pdf->Cell(60,($line_keterampilan * 6),$row->mata_pelajaran,1,0);
 			        $pdf->Cell(12,($line_keterampilan * 6),number_format($nilai_pengetahuan[$i-1],2),1,0,'C');
 			        $pdf->Cell(12,($line_keterampilan * 6),$predikatnya[$i-1],1,0,'C');
 			        $xPos = $pdf->GetX();
