@@ -760,7 +760,7 @@
                 }); 
 
                 $.ajax({
-                    url: "<?php echo base_url() ?>index.php/keterampilan/get_keterampilan/<?php echo $kunci ?>/"+btn,
+                    url: "<?php echo base_url() ?>index.php/keterampilan/get_keterampilan_data/<?php echo $kunci ?>/"+btn,
                     type: "POST",
                     dataType: 'json',
                     success: function(data){

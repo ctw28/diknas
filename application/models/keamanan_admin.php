@@ -8,9 +8,10 @@ class Keamanan_admin extends CI_model {
 		
 		
 		if ($this->session->userdata('logged_in_hasil')) {
-			// redirect('admin_utama');
 		 	$session_data = $this->session->userdata('logged_in_hasil');
-			// $isi['nama'] = $session_data['nama_admin']; $isi['level'] = $session_data['level'];
+			$isi['nama'] = $session_data['nama_wali_kelas']; 
+			$isi['kelas'] = $session_data['kelas'];
+			return $isi;
 		}
 		else{
 			$this->session->sess_destroy();

@@ -55,7 +55,7 @@
                                 <img class="nav-user-photo" src="<?php echo base_url()?>assets/images/man.png" alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Welcome,</small>
-                                    <?php echo $nama;?>
+                                    <?php echo $logged_in_data['nama'];?>
                                 </span>
 
                                 <i class="ace-icon fa fa-caret-down"></i>
@@ -91,7 +91,7 @@
                 </div>
                 <div class="col-sm-2"></div>
                 <div class="col-sm-12">
-                <b><?php echo $nama;?></b><br>
+                <b><?php echo $logged_in_data['nama'];?></b><br>
                 <b>Wali Kelas : XII.A</b><br>
                     
                 </div>

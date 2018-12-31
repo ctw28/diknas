@@ -365,7 +365,7 @@ class Hasil extends CI_Controller {
 
         $detail_siswa = $this->pengetahuan_model->get_data_pengetahuan_siswa_mapel($mapel, $siswa); 
         $data_pengetahuan = $this->pengetahuan_model->get_data_pengetahuan_siswa_mapel($mapel, $siswa); 
-        $data_keterampilan = $this->keterampilan_model->get_data_keterampilan_siswa_mapel($mapel, $siswa);  
+        $data_keterampilan = $this->keterampilan_model->get_data_keterampilan_by_($mapel, $siswa);  
         $data_sikap = $this->sikap_model->get_data_sikap_siswa_mapel($mapel, $siswa); 
 
         $data_sikap_siswa = array();
@@ -619,7 +619,7 @@ class Hasil extends CI_Controller {
 
 		$isi['kunci'] = $this->uri->segment(3);
 		$isi['data_pengetahuan'] = $this->pengetahuan_model->get_data_pengetahuan($isi['kunci']);		
-		$isi['data_keterampilan'] = $this->keterampilan_model->get_data_keterampilan($isi['kunci']);		
+		$isi['data_keterampilan'] = $this->keterampilan_model->get_data_keterampilan_by_mapel($isi['kunci']); // kunci = id_guru	
 		$isi['data_sikap'] = $this->sikap_model->get_data_sikap($isi['kunci']);		
 
 		$this->load->view('hasil-view', $isi);
